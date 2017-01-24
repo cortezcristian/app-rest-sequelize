@@ -10,7 +10,7 @@ before_install:
 before_script:
   - node ./bin/www &
 script:
-  - sleep 40 && mocha
+  - sleep 80 && mocha
 notifications:
   email:
     on_success: never
