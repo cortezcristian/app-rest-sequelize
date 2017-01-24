@@ -1,5 +1,5 @@
 {
-  "name": "anyandgo",
+  "name": "app-rest-sequelize",
   "version": "0.0.1-1",
   "private": true,
   "scripts": {
@@ -67,19 +67,5 @@
     "grunt-contrib-uglify": "~0.6.0",
     "grunt-contrib-cssmin": "~0.10.0",
     "superagent-csrf": "~1.0.0"
-  },
-  "subdomain": "cortezcristian-anyandgo",
-  "domains": [
-    "anyandgo.io",
-    "www.anyandgo.io",
-    "anyandgo.com",
-    "www.anyandgo.com",
-    "anyandgo.net",
-    "www.anyandgo.net",
-    "anyandgo.info",
-    "www.anyandgo.info"
-  ],
-  "engines": {
-    "node": "0.10.x"
   }
 }

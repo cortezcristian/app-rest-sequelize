@@ -9,3 +9,6 @@ before_install:
   - npm install -g bower grunt-cli mocha
 before_script:
   - node ./bin/www &
+  - sleep 4
+script:
+  - mocha
