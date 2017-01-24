@@ -33,7 +33,7 @@ var app = module.parent.exports.app,
   /* forms:end */
   restify = require('express-restify-mongoose'),
   mongooseForms = require('mongoose-forms'),
-  Handlebars = require('handlebars'),
+  Handlebars = require('handlebars');
   // mongooseforms bind
   mongooseForms.bindHelpers(Handlebars, '../../../utils/formstemplates');
 
