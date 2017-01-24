@@ -1,4 +1,4 @@
-// # Site Routes 
+// # Site Routes
 // --------------------------------------
 // contains all the routes of the site including pages, and rest api services.
 //
@@ -23,7 +23,7 @@ var app = module.parent.exports.app,
   /* models:end */
   // ### Authorizers
   // Mantain certains part from the application secure
-  // preventing not authenticated actors access to private parts 
+  // preventing not authenticated actors access to private parts
   // according to their roles
   /* authorizers:start */
   adminAuth = require('../auth/admin-auth.js'),
@@ -34,7 +34,6 @@ var app = module.parent.exports.app,
   restify = require('express-restify-mongoose'),
   mongooseForms = require('mongoose-forms'),
   Handlebars = require('handlebars'),
-  shell = require('shelljs');
   // mongooseforms bind
   mongooseForms.bindHelpers(Handlebars, '../../../utils/formstemplates');
 
@@ -53,7 +52,7 @@ app.get('/', function (req, res) {
 });
 
 /* page:public:start */
-  
+
 // ### Contact Page
 app.get('/contact', function (req, res) {
     var recaptcha = "";
@@ -126,7 +125,7 @@ app.post('/contact', function (req, res, next) {
             subject: '[anyandgo] Web Contact',
             email: req.body.email
         }, {
-            from: config.mail.auth.user, 
+            from: config.mail.auth.user,
             to: config.mail.contact,
             subject: '[anyandgo] Web Contact',
             text: msg+' Sent from anyandgo'
@@ -175,7 +174,7 @@ app.get('/admin/config', function (req, res) {
 });
 
 // ### Panel
-app.get('/admin/panel', 
+app.get('/admin/panel',
     /* route:autorizers:start*/
     adminAuth.autorizer,
     /* route:autorizers:end */
@@ -245,9 +244,9 @@ app.get('/forms/:modelname/create', function (req, res) {
     var SampleForm = mongooseForms.Form(anyandgo.models[req.params.modelname]);
     /*
     SampleForm = SampleForm.eachField(function(field, name){
-        console.log(">>", field, name);    
+        console.log(">>", field, name);
         if(name == "__v"){
-           field.mapped = false;    
+           field.mapped = false;
            console.log("->", field);
         }
         field.buttons = [{ sample: "lala"}];
@@ -267,11 +266,11 @@ app.get('/forms/:modelname/create', function (req, res) {
           form = _form;
         },
         getForm: function() {
-          
+
           form.eachMappedField(function(field, path) {
-            field.value = model[path]; 
-            field.ngmodel = req.params.modelname; 
-            field.formname = "myForm"; 
+            field.value = model[path];
+            field.ngmodel = req.params.modelname;
+            field.formname = "myForm";
             // Override type with ngoform setting
             if ( field.type.options.ngoform ) {
                 field.type.instance = field.type.options.ngoform.control;
@@ -287,8 +286,8 @@ app.get('/forms/:modelname/create', function (req, res) {
           return form;
         },
         getModel: function() {
-          
-          form.eachMappedField(function(field, path) {      
+
+          form.eachMappedField(function(field, path) {
             model[path] = field.value;
           });
 
@@ -302,7 +301,7 @@ app.get('/forms/:modelname/create', function (req, res) {
     var form = ngBridge(new anyandgo.models[req.params.modelname](), SampleForm).getForm();
     //var form = mongooseForms.Bridge(new Sample(), SampleForm).getForm();
     var formHTMl = Handlebars.helpers.renderForm(form);
-    
+
     console.log(formHTMl);
     res.render('forms', { title: 'anyandgo', section: 'Form', form: formHTMl, mname: req.params.modelname });
 });
@@ -313,29 +312,9 @@ app.get('/forms/sample/edit', function (req, res) {
     Sample.findOne({}, function(err, doc){
         var form = mongooseForms.Bridge(doc, SampleForm).getForm();
         var formHTMl = Handlebars.helpers.renderForm(form);
-    
+
         console.log(formHTMl);
         res.render('forms', { title: 'anyandgo', section: 'Form', form: formHTMl });
     });
 });
-
-// ## 5. Super Admin Tasks
-// --------------------------------------
-app.get('/tasks/test', function (req, res) {
-    shell.exec('./node_modules/mocha/bin/mocha --reporter doc', function(code, output) {
-        console.log('Exit code:', code);
-        console.log('Program output:', output);
-        res.end(output);
-    });
-});
-/*
-// TODO: prevent auto-reboot when running with grunt, securitize mname parameter
-app.get('/tasks/create/model/:mname', function (req, res) {
-    shell.exec('grunt create:model:'+req.params.mname, function(code, output) {
-        console.log('Exit code:', code);
-        console.log('Program output:', output);
-        res.end(output);
-    });
-});
-*/
 
