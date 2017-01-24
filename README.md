@@ -7,8 +7,12 @@ Sequelize Express Angular App [![Build Status](https://travis-ci.org/cortezcrist
 	- [Development](#development)
 	- [Testing](#testing)
 - [Deliverables](#deliverables)
-	- Service: [./app/scripts/services/solution.js](./app/scripts/services/solution.js)
-	- Tests: [./test/spec/services/solution.js](./test/spec/services/solution.js)
+	- Models:
+    - Client [models/clients.js](./models/clients.js)
+    - Client Unit Test [test/unit/models/providers-tests.js](./test/unit/models/providers-tests.js)
+    - Provider [models/providers.js](./models/providers.js)
+    - Provider Unit Test [test/unit/models/providers-tests.js](./test/unit/models/providers-tests.js)
+	- Rest:
 - [Docs](#docs)
 	- [Demo](#demo)
 	- [Logs](#logs)
@@ -49,7 +53,7 @@ $ grunt test --force
 - Kickstart
 In order to gain velocity project was generated with [cortezcristian/anyandgo](http://anyandgo.io/)
 - [PR#1](https://github.com/AccelOne/angulartest/pull/://github.com/cortezcristian/app-rest-sequelize/pull/1)
-Simplify structure and update dependencies
+Simplify structure and update dependencies, tweak test suite, integrate ci
 
 ## Express 4.x
 Facts about this implementation:
