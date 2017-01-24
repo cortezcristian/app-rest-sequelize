@@ -9,9 +9,8 @@ before_install:
   - npm install -g bower grunt-cli mocha
 before_script:
   - node ./bin/www &
-  - sleep 20
 script:
-  - mocha
+  - sleep 40 && mocha
 notifications:
   email:
     on_success: never
