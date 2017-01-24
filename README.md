@@ -21,10 +21,10 @@ Sequelize Express Angular App [![Build Status](https://travis-ci.org/cortezcrist
 
 ### Installation
 
-After installing Node.JS (v5.7.0) and Git please make sure you have Bower and Grunt clients.
+After installing Node.JS (v5.7.0) and Git please make sure you have Mocha, Bower and Grunt clients.
 
 ```
-$ npm install -g grunt-cli bower
+$ npm install -g grunt-cli bower mocha
 ```
 
 Being on the main project folder run:
@@ -42,6 +42,12 @@ $ grunt serve --force
 ```
 
 ### Testing
+
+Run models unit tests
+
+```
+$ mocha test/unit
+```
 
 Running `grunt test` will run the unit tests with karma.
 
