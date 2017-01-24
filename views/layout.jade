@@ -1,0 +1,132 @@
+doctype html
+html(lang='en',ng-app="anyandgoApp")
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width')
+    title= title
+    // Favicon
+    link(rel='icon', type='image/png', sizes='32x32', href='/favicon-32x32.png')
+    link(rel='icon', type='image/png', sizes='96x96', href='/favicon-96x96.png')
+    link(rel='icon', type='image/png', sizes='16x16', href='/favicon-16x16.png')
+    block meta
+      // for Google
+      meta(name='description', content='')
+      meta(name='keywords', content='')
+      meta(name='author', content='')
+      meta(name='copyright', content='')
+      meta(name='application-name', content='')
+      // for Facebook
+      meta(property='og:title', content='')
+      meta(property='og:type', content='article')
+      meta(property='og:image', content='')
+      meta(property='og:url', content='')
+      meta(property='og:description', content='')
+      // for Twitter
+      meta(name='twitter:card', content='summary')
+      meta(name='twitter:title', content='')
+      meta(name='twitter:description', content='')
+      meta(name='twitter:image', content='')
+    link(href='http://fonts.googleapis.com/css?family=Hammersmith+One',rel='stylesheet',type='text/css')
+    - if(settings.envflag !== "production") {
+    //-<!-- build:css(public) styles/site-styles.min.css -->
+    //bower:css
+    link(rel='stylesheet', href='/components/metisMenu/dist/metisMenu.css')
+    link(rel='stylesheet', href='/components/angular-toggle-switch/angular-toggle-switch.css')
+    link(rel='stylesheet', href='/components/perfect-scrollbar/css/perfect-scrollbar.css')
+    link(rel='stylesheet', href='/components/components-font-awesome/css/font-awesome.css')
+    link(rel='stylesheet', href='/components/prism/themes/prism.css')
+    link(rel='stylesheet', href='/components/animate.css/animate.css')
+    link(rel='stylesheet', href='/components/angular-hotkeys/build/hotkeys.css')
+    //endbower
+    link(rel='stylesheet', href='/components/prism/themes/prism-okaidia.css')
+    //-<!-- endbuild -->
+    - } else {
+    link(rel='stylesheet', href='/dist/styles/site-styles.min.css')
+    link(rel='stylesheet', href='/components/fontawesome/css/font-awesome.css')
+    - }
+    block css
+      link(rel='stylesheet', href='/css/bootstrap.min.css')
+      link(rel='stylesheet', href='/css/style.css')
+    block js
+      - if(settings.envflag !== "production") {
+      script(src='http://localhost:35729/livereload.js')
+      - if(envflag==="development" && autologin.enabled) {
+        script(src='http://localhost:35729/livereload.js')
+        script.
+          window.LiveReload.on("connect", function(){
+            console.log("------ Dev ----------");
+            $(document).ready(function(){
+                var loginBtn = $('#loginForm input[type="submit"]:visible');
+                if (loginBtn.size()) {
+                    console.log('Automated login attempt')
+                    $('input[name="email"]').val("#{autologin.username}");
+                    $('input[name="password"]').val("#{autologin.password}");
+                    loginBtn.click();
+                }
+            });
+          });
+      - }
+      - }
+
+  body.container-fluid
+    include ./partials/site-menu
+    block content
+    block footer
+      include ./partials/site-footer
+    block modals
+      include ./partials/modal-video
+
+    script(src="https://www.youtube.com/iframe_api")
+    - if(settings.envflag !== "production") {
+    //-<!-- build:js(public) scripts/site-vendors.min.js -->
+    //bower:js
+    script(src='/components/jquery/dist/jquery.js')
+    script(src='/components/angular/angular.js')
+    script(src='/components/angular-bootstrap/ui-bootstrap-tpls.js')
+    script(src='/components/bootstrap/dist/js/bootstrap.js')
+    script(src='/components/metisMenu/dist/metisMenu.js')
+    script(src='/components/lodash/dist/lodash.compat.js')
+    script(src='/components/restangular/dist/restangular.js')
+    script(src='/components/angular-resource/angular-resource.js')
+    script(src='/components/angular-cookies/angular-cookies.js')
+    script(src='/components/angular-sanitize/angular-sanitize.js')
+    script(src='/components/angular-animate/angular-animate.js')
+    script(src='/components/angular-touch/angular-touch.js')
+    script(src='/components/angular-route/angular-route.js')
+    script(src='/components/angular-toggle-switch/angular-toggle-switch.js')
+    script(src='/components/waypoints/lib/noframework.waypoints.js')
+    script(src='/components/perfect-scrollbar/js/perfect-scrollbar.jquery.js')
+    script(src='/components/perfect-scrollbar/js/perfect-scrollbar.js')
+    script(src='/components/jquery.scrollTo/jquery.scrollTo.js')
+    script(src='/components/prism/prism.js')
+    script(src='/components/gsap/src/uncompressed/TweenMax.js')
+    script(src='/components/ngFx/dist/ngFx.js')
+    script(src='/components/angular-youtube-mb/src/angular-youtube-embed.js')
+    script(src='/components/angular-hotkeys/build/hotkeys.js')
+    //endbower
+    //-<!-- endbuild -->
+    - } else {
+    script(src='/dist/scripts/site-vendors.min.js')
+    - }
+    - if(settings.envflag !== "production") {
+    //-<!-- build:js(public) scripts/site-app.min.js -->
+    //site:app:scripts
+    script(src='/scripts/site/app.js')
+    script(src='/scripts/site/controllers/main.js')
+    script(src='/scripts/site/controllers/about.js')
+    script(src='/scripts/site/controllers/sample.js')
+    script(src='/scripts/site/controllers/sample-new.js')
+    script(src='/scripts/site/controllers/sample-edit.js')
+    script(src='/scripts/site/directives/langsupport.js')
+    script(src='/scripts/site/directives/metismenu.js')
+    script(src='/scripts/site/directives/hero.js')
+    //site:app:scripts:end
+    //-<!-- endbuild -->
+    - } else {
+    script(src='/dist/scripts/site-app.min.js')
+    - }
+    block scripts
+
+    script#github-bjs(async='', defer='', src='https://buttons.github.io/buttons.js')
+    - if(tracking)
+      include ./partials/analytics

@@ -1,0 +1,67 @@
+extends layout
+
+block content
+  .row
+    .neck
+      #main-carousel.carousel.carousel-bg.slide(data-ride='carousel', data-interval="30000", hero)
+        // Indicators
+        ol.carousel-indicators
+          li.active(data-target='#main-carousel', data-slide-to='0')
+          li(data-target='#main-carousel', data-slide-to='1')
+        
+        // Wrapper for slides
+        .carousel-inner(role='listbox')
+          .item.active
+            .carousel-caption(data-animation="animated flipInY")
+              h2(data-animation="animated bounceInDown") #{__("Get Ready")}
+              p.text-center
+                span.text-center(data-animation="animated zoomInRight")
+                  img(src="img/logos/anyandgo-eq-mean.png",style="max-width: 400px;")
+          .item
+            .carousel-caption(data-animation="animated flipInY")
+              h2(data-animation="animated flip") #{__("Innovate")}
+              p
+                span(data-animation="animated rotateIn")  $ [sudo] npm install anyandgo-cli
+                span(data-animation="animated rollIn")  $ anyandgo init my-new-project 
+        
+        // Controls
+        a.left.carousel-control(href='#main-carousel', role='button', data-slide='prev')
+          span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+          span.sr-only Previous
+        a.right.carousel-control(href='#main-carousel', role='button', data-slide='next')
+          span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+          span.sr-only Next
+      
+  .row.our-main-content
+    .col-sm-10.col-sm-offset-1
+          
+          .col-sm-8
+            .thumbnail
+              .caption
+                h3 #{__("Install anyandgo")}  
+                pre
+                  code.language-bash $ [sudo] npm install -g anyandgo-cli 
+
+                h3 Create a new project 
+                pre
+                  code.language-bash 
+                  | $ anyandgo init mynewproject
+                  |    You have successfully created the anyandgo project
+                  |    Try:
+                  |         cd mynewproject
+                  |         npm install && bower install && grunt
+                h3 #{__("MEAN Framework")}  
+                div(style="min-height: 100px; width: 100%;")
+                  p Anyandgo let you create blazing fast, scalable web applications using MongoDB, Express, Node.JS and AngularJS. 
+                  a.btn.btn-default(href='/docs', role='button')
+                    i.fa.fa-book(style="padding-right:10px")
+                    | #{__("Read Docs")}
+      
+          .col-sm-4
+            .thumbnail
+              a.hide(href,ng-click="openVideoModal('vF9NKt2UXDU')")
+                img(src='http://img.youtube.com/vi/vF9NKt2UXDU/mqdefault.jpg', alt='video',style="width:700px;height: 170px;")
+              .caption
+                h3 #{__("Components")}
+                  //include components
+

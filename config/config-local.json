@@ -1,0 +1,70 @@
+{
+    "app": {
+        "domain" : "0.0.0.0",
+        "port": 3000,
+        "logs": {
+            "enabled": false,
+            "file": "access.log",
+            "format": "dev"
+         }
+    },
+	"auth": {
+		"facebook": {
+			"clientid" : "",
+			"clientsecret" : "",
+			"callback" : "http://localhost:3000/auth/facebook/callback"
+		},
+		"linkedin": {
+			"apikey" : "",
+			"secret" : "",
+            "clientoauth": "",
+            "clientsecret" : "",
+            "callback" : "http://127.0.0.1:3000/auth/linkedin/callback"
+		},
+		"github": {
+			"clientid" : "",
+			"clientsecret" : "",
+            "callback" : "http://127.0.0.1:3000/auth/github/callback"
+		}
+	},
+    "autologin": {
+        "enabled" : false,
+        "username" : "admin@anyandgo.com",  
+        "password" : "123456"  
+    },
+    "db": {
+        "domain" : "localhost",
+        "name" : "anyandgodb",
+        "user" : "",
+        "pass" : ""
+    },
+    "mail" : {
+        "enabled" : false,
+        "transport" : "smtp",
+        "host" : "",
+        "port" : 25,
+        "contact" : "",
+        "auth" : {
+            "user" : "",
+            "pass" : ""
+        }
+    },
+    "captcha" : {
+        "enabled" : false,
+        "publickey" : "",
+        "privatekey" : ""
+    },
+    "security": {
+        "enabled" : true
+    },
+    "analytics": {
+        "enabled" : true,
+        "tracking": "UA-XXXXX-X"
+    },
+    "csrf": "disabled",
+    "cors": "enabled",
+    "fixtures": "enabled",
+    "session" : {
+        "secret" : "incorrect"
+    }
+}
