@@ -34,7 +34,7 @@ process.on('uncaughtException', function(err) {
     }
 });
 
-// Express 
+// Express
 var app = exports.app = express();
 
 app.set("envflag", config.envflag || process.env.NODE_ENV);
@@ -54,6 +54,15 @@ app.use(function(req, res, next){
 
 // Database Connection
 var dbConex = exports.dbConex = utils.dbConnection(config.db.domain,config.db.name,config.db.user,config.db.pass);
+var sequelize = exports.sequelize = require('./db/conn.js');
+var Client = require('./models/clients.js');
+
+app.get('/clients', function(req, res){
+  Client.findAll().then(function(result){
+    res.json(result);
+  });
+});
+
 
 // DB Fixtures
 if (config.fixtures && config.fixtures === "enabled") {
@@ -75,7 +84,7 @@ i18n.configure({
   locales:[
       //global:translation:start
       //global:translation:end
-      'en-us', 
+      'en-us',
       'es-ar'],
   // sets a custom cookie name to parse locale settings from  - defaults to NULL
   cookie: 'lang',
@@ -105,7 +114,7 @@ app.use('/css', stylus.middleware({
 // [Predefined Formats](https://github.com/expressjs/morgan#predefined-formats)
 var loggerConfigs = {
     levels: { HTTP: 0, debug: 1, info: 2, warn: 3, error: 3 },
-    colors: { HTTP: 'blue', debug: 'white', info: 'green', warn: 'yellow', error: 'red' } 
+    colors: { HTTP: 'blue', debug: 'white', info: 'green', warn: 'yellow', error: 'red' }
 };
 winston.addColors(loggerConfigs.colors);
 

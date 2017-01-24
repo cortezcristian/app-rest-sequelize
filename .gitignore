@@ -36,6 +36,7 @@ public/components
 public/scripts/admin/admin_components
 public/scripts/admin/admin_components/**/*
 .sass-cache
+.DS_Store
 
 # Minimified files
 public/css/style.css
