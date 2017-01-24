@@ -1,5 +1,5 @@
 {
-  "name": "anyandgo",
+  "name": "app-rest-sequelize",
   "version": "0.0.1-1",
   "private": true,
   "scripts": {
@@ -37,8 +37,10 @@
     "passport-linkedin": "^0.1.3",
     "passport-local": "~1.0.0",
     "recaptcha": "~1.2.0",
+    "sequelize": "^3.30.0",
     "serve-favicon": "~2.1.5",
     "shelljs": "~0.3.0",
+    "sqlite": "^2.2.4",
     "stylus": "~0.49.1",
     "winston": "~1.0.0"
   },
@@ -59,28 +61,11 @@
     "grunt-mocha-test": "~0.12.1",
     "jshint-stylish": "~1.0.0",
     "superagent": "~0.20.0",
-    "zombie": "~2.0.8",
-    "coveralls": "~2.11.2",
-    "istanbul": "~0.3.2",
     "grunt-contrib-clean": "~0.6.0",
     "grunt-usemin": "~2.4.0",
     "grunt-contrib-concat": "~0.5.0",
     "grunt-contrib-uglify": "~0.6.0",
     "grunt-contrib-cssmin": "~0.10.0",
     "superagent-csrf": "~1.0.0"
-  },
-  "subdomain": "cortezcristian-anyandgo",
-  "domains": [
-    "anyandgo.io",
-    "www.anyandgo.io",
-    "anyandgo.com",
-    "www.anyandgo.com",
-    "anyandgo.net",
-    "www.anyandgo.net",
-    "anyandgo.info",
-    "www.anyandgo.info"
-  ],
-  "engines": {
-    "node": "0.10.x"
   }
 }
