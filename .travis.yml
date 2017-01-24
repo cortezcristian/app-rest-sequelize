@@ -12,3 +12,7 @@ before_script:
   - sleep 4
 script:
   - mocha
+notifications:
+  email:
+    on_success: never
+    on_failure: change
