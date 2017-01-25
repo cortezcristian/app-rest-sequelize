@@ -1,0 +1,22 @@
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title">Please Confirm</h3>
+    </div>
+    <div class="modal-body">
+        <p>
+          You are about to remove the following item(s):
+        </p>
+        <ul>
+            <li ng-repeat="item in items">
+              {{item.name}}
+            </li>
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-primary" type="button" ng-click="ok()">
+            <i class="fa fa-trash" style="margin-right: 5px;"></i>
+            Delete them All
+        </button>
+    </div>
+</div>
