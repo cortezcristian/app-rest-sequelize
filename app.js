@@ -9,15 +9,13 @@ var winston = require('winston');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var stylus = require('stylus');
-var i18n = require('i18n');
 var helmet = require('helmet');
 var csrf = require('csurf');
-var flash = require('connect-flash');
 var session = require('express-session');
 var methodOverride = require('method-override');
 var config = exports.config = require('./config');
 var anyandgo = exports.anyandgo = {};
-var epilogue = require('epilogue');
+var epilogue = exports.epilogue = require('epilogue');
 
 // Anyandgo
 anyandgo.models = [];
@@ -35,13 +33,11 @@ process.on('uncaughtException', function(err) {
 var app = exports.app = express();
 
 app.set("envflag", config.envflag || process.env.NODE_ENV);
-app.set("autologin", config.autologin || {});
 
 // Setup vars
 app.use(function(req, res, next){
   res.locals.envflag = config.envflag || process.env.NODE_ENV;
   res.locals.path = req.path;
-  res.locals.autologin = config.autologin || {};
   next();
 });
 
@@ -62,21 +58,6 @@ if (config.security && config.security === "enabled") {
     app.use(helmet.noSniff());
     app.use(helmet.frameguard('deny'));
 }
-
-// i18n setup
-i18n.configure({
-  // setup some locales: other locales default to en silently
-  locales:[
-      //global:translation:start
-      //global:translation:end
-      'en-us',
-      'es-ar'],
-  // sets a custom cookie name to parse locale settings from  - defaults to NULL
-  cookie: 'lang',
-  // where to store json files - defaults to './locales' relative to modules directory
-  directory: __dirname + '/locales',
-  defaultLocale: 'es-ar'
-});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -185,36 +166,9 @@ app.use(cookieParser());
 
 
 app.use(express.static(path.join(__dirname, 'public')));
-// i18n init parses req for language headers, cookies, etc.
-app.use(i18n.init);
-// Passport
+
+// Session
 app.use(session({ secret: 'secret', saveUninitialized: true, resave: true })); // session secret
-app.use(flash()); // use connect-flash for flash messages stored in session
-
-
-// Initialize epilogue
-exports.epilogue = epilogue.initialize({
-  app       : app,
-  sequelize : sequelize
-});
-
-var Client = require('./models/clients.js');
-
-// Create REST resource
-var clientResource = epilogue.resource({
-  model: Client,
-  endpoints: ['/api/v1/clients', '/api/v1/clients/:idClient']
-});
-
-/*
-app.get('/clients', function(req, res){
-  Client.findAll().then(function(result){
-    res.json(result);
-  });
-});
-*/
-
-
 
 // CSRF Security
 // http://stackoverflow.com/questions/23997572/error-misconfigured-csrf-express-js-4
@@ -248,12 +202,6 @@ if (config.csrf && config.csrf === "enabled") {
       res.send('sorry your request was invalid');
     });
 }
-
-// Interceptors
-app.use(function(req, res, next) {
-    res.locals.flash = req.flash();
-    next();
-});
 
 // Routes
 require('./routes/apis');

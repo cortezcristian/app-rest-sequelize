@@ -28,7 +28,7 @@ describe('REST API Client '+d+"/api/v1/clients", function(){
         // It show create a new document in the database
         client = Client.build({ name: 'client'+Math.floor((Math.random() * 10) + 1)});
         client.save().then(function(record){
-            clientId = record.get('idClient');
+            clientId = record.get('id');
             done()
         }).catch(function(error) {
             done(error);

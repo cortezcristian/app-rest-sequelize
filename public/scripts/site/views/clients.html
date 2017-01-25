@@ -1,0 +1,16 @@
+
+<header class="top-title-bar">
+    <h3>
+        <i class="fa fa-users fa-fw"></i>
+        Clients
+    </h3>
+    <div class="actions">
+        <a class="btn btn-xs btn-default" href="#/crud/clients-new"><i class="fa fa-plus"></i> New Client</a>
+        <a class="btn btn-xs btn-default" ng-click="confirmRemove()" ng-class="{disabled:!(multipleSelected>0)}"><i class="fa fa-trash"></i> Remove</a>
+        <span ng-class="{hide:!(multipleSelected>0)}">
+        {{multipleSelected}}
+        </span>
+    </div>
+</header>
+
+<div id="grid1" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-cellNav class="grid"></div>

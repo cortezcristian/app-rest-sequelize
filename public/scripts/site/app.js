@@ -1,81 +1,4 @@
 'use strict';
-$(document).ready(function(){
-
-    var findBootstrapEnvironment = function() {
-        var envs = ['xs', 'sm', 'md', 'lg'];
-
-        var el = $('<div>');
-        el.appendTo($('body'));
-
-        for (var i = envs.length - 1; i >= 0; i--) {
-            var env = envs[i];
-
-            el.addClass('hidden-'+env);
-            if (el.is(':hidden')) {
-                el.remove();
-                return env
-            }
-        };
-    }
-
-    var env;
-    var panels = function(){
-      var ho = 45;
-      var h = $(window).height() - ho;
-      env = findBootstrapEnvironment();
-      
-      $('#side, #content').css({
-          'height': h+'px',
-          'top': ho+'px'
-      });
-
-      $('.ps-scroller')
-          .perfectScrollbar();
-
-    }
-
-
-
-    panels();
-    $(window).resize(function(){
-        panels();
-    });
-
-    setTimeout(function(){
-      $('.github-btn-con').removeClass('hide');
-      $('.github-btn-con').css("margin-top","8px");
-    }, 1200);
-
-
-    // Start as collapsed for small devices
-    if(env === 'xs' || env === 'sm'){
-        $("#side").toggleClass('do-collapse');
-    }
-
-    $('a.collapser').click(function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        $("#side").toggleClass('do-collapse');
-        if($("#side").hasClass('do-collapse')){
-            //$("#side").width('40px');
-            $("#content").innerWidth(($(window).width()-41)+'px');
-            if(env === 'xs' || env === 'sm'){
-                $("#side").css('z-index', '1');
-                //$("#content").css('left', '');
-            }
-            //console.info($("#content").width(), $(window).width()-41);
-        } else {
-            $("#side").width('');
-            $("#content").width('');
-            if(env === 'xs' || env === 'sm'){
-                $("#side").css('z-index', '3');
-                //$("#content").css('left', '260px');
-            }
-        }
-    });
-    
-});
-
 /**
  * @ngdoc overview
  * @name anyandgoApp
@@ -92,86 +15,97 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'youtube-embed',
+    'ui.grid',
+    'ui.grid.expandable',
+    'ui.grid.selection',
+    'ui.grid.pinning',
+    'ui.grid.pagination',
+    'ui.grid.edit',
+    'ui.grid.cellNav',
+    'ui.bootstrap',
     'cfp.hotkeys',
+    'toastr',
     'restangular'
   ])
-  .config(function ($routeProvider, $locationProvider, RestangularProvider, hotkeysProvider) {
+  .config(function ($routeProvider, $locationProvider, RestangularProvider, hotkeysProvider, toastrConfig) {
 
     // Hotkeys killswitch
     // see https://github.com/chieffancypants/angular-hotkeys#configuration
     hotkeysProvider.includeCheatSheet = true;
 
+    // Toastr Configuration
+    angular.extend(toastrConfig, {
+      autoDismiss: false,
+      containerId: 'toast-container',
+      maxOpened: 0,
+      newestOnTop: true,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: false,
+      preventOpenDuplicates: false,
+      target: 'body'
+    });
+
+    // Setup Restangular
+    RestangularProvider.setBaseUrl('/api/v1');
+    RestangularProvider.setRestangularFields({
+      id: 'id'
+    });
+
     //$locationProvider.html5Mode(true).hashPrefix('!');
-    //$cookies.lang = "en-us";
-    /*
+
+    // Routes Setup
     $routeProvider
       .when('/', {
-        templateUrl: '/scripts/admin/views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: '/scripts/site/views/clients.html',
+        controller: 'ClientsCtrl'
+      })
+      .when('/crud/clients-new', {
+        templateUrl: '/scripts/site/views/clients-new.html',
+        controller: 'ClientsNewCtrl'
+      })
+      .when('/crud/clients-edit/:id', {
+        templateUrl: '/scripts/site/views/clients-new.html',
+        controller: 'ClientsEditCtrl',
+        resolve: {
+          clients: function(Restangular, $route){
+            return Restangular.one('clients', $route.current.params.id).get();
+          }
+        }
       })
       .otherwise({
         redirectTo: '/'
-      }); */
-  }).run(function ($rootScope, $location, $route, $timeout, $http, $cookies, $anchorScroll, youtubeEmbedUtils) {
+      });
+
+  }).run(function ($rootScope, $location, $route, $timeout, $http, $cookies, $anchorScroll, $log) {
 
     /*
+     * Global configs
     */
 
     $rootScope.config = {};
     $rootScope.config.app_url = $location.url();
     $rootScope.config.app_path = $location.path();
+    $rootScope.config.app_domain = '';
+    if($location.port()!=='80'){
+        $rootScope.config.app_domain = $location.protocol() + "://" + $location.host() + ":" + $location.port()
+    } else {
+        $rootScope.config.app_domain = $location.protocol() + "://" + $location.host();
+    }
+    $rootScope.config.app_api = $rootScope.config.app_domain + '/api/v1/';
     $rootScope.layout = {};
     $rootScope.layout.loading = false;
-      
-    //$anchorScroll.yOffset = 50;
 
-    $rootScope.gotoAnchor = function(x) {
-      var newHash = x;
-      if ($location.hash() !== newHash) {
-        // set the $location.hash to `newHash` and
-        // $anchorScroll will automatically scroll to it
-        $location.hash(x);
-      } else {
-        // call $anchorScroll() explicitly,
-        // since $location.hash hasn't changed
-        $anchorScroll();
-      }
-    }; 
-
-    // Videos
-    // $rootScope.modalPlayer = {};
-    $rootScope.modalVideo = '';
-
-    $rootScope.openVideoModal = function(video){
-      //
-      // var id = youtubeEmbedUtils.getIdFromURL(video.url);
-      $rootScope.modalVideo = video;
-      $('#modalViewVideo').modal('show');
-    }
-
-
-    $rootScope.closeVideoModal = function(video){
-      // Stop video
-      $rootScope.modalPlayer.stopVideo();
-    }
-
-    $('#modalViewVideo').on('hidden.bs.modal', function () {
-      $rootScope.modalPlayer.stopVideo();
-    });
-
-    
-    if(!navigator.userAgent.match(/Zombie/)) {
 
     $rootScope.$on('$routeChangeStart', function () {
-        console.log('$routeChangeStart');
+        $log.log('$routeChangeStart');
         //show loading gif
         $timeout(function(){
-          $rootScope.layout.loading = true;          
+          $rootScope.layout.loading = true;
         });
     });
+
     $rootScope.$on('$routeChangeSuccess', function () {
-        console.log('$routeChangeSuccess');
+        $log.log('$routeChangeSuccess');
         //hide loading gif
         $timeout(function(){
           $rootScope.layout.loading = false;
@@ -180,12 +114,11 @@ angular
     $rootScope.$on('$routeChangeError', function () {
 
         //hide loading gif
-        console.log('error');
+        $log.log('error');
         $rootScope.layout.loading = false;
 
     });
 
-    }
 
   });
 
