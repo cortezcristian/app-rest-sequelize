@@ -32,7 +32,7 @@ $ npm install -g grunt-cli bower mocha
 Being on the main project folder run:
 
 ```
-$ npm i && grunt
+$ npm i & bower i && grunt
 ```
 
 ### Development
