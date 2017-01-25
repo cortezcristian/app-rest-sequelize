@@ -15,7 +15,7 @@ var session = require('express-session');
 var methodOverride = require('method-override');
 var config = exports.config = require('./config');
 var anyandgo = exports.anyandgo = {};
-var epilogue = require('epilogue');
+var epilogue = exports.epilogue = require('epilogue');
 
 // Anyandgo
 anyandgo.models = [];
@@ -169,33 +169,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Session
 app.use(session({ secret: 'secret', saveUninitialized: true, resave: true })); // session secret
-
-
-// Initialize epilogue
-exports.epilogue = epilogue.initialize({
-  app       : app,
-  sequelize : sequelize
-});
-
-var Client = require('./models/clients.js');
-
-// Create REST resource
-var clientResource = epilogue.resource({
-  model: Client,
-  endpoints: ['/api/v1/clients', '/api/v1/clients/:id']
-});
-
-sequelize.sync({force:true});
-
-/*
-app.get('/clients', function(req, res){
-  Client.findAll().then(function(result){
-    res.json(result);
-  });
-});
-*/
-
-
 
 // CSRF Security
 // http://stackoverflow.com/questions/23997572/error-misconfigured-csrf-express-js-4
