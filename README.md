@@ -113,13 +113,6 @@ Facts about this implementation:
 - This app relies on Bootstrap and Stylus to manage the styles of the SPA.
 - Big part of the initial code was generated with a mean framework I have built [repo cortezcristian/anyandgo](https://github.com/cortezcristian/anyandgo), just stripped parts of it that were not needed and hacked it to work with relational databases.
 
-Modules added:
-+ [Stylus](http://learnboost.github.io/stylus/)
-
-Front end assets:
-+ [Bootstrap](http://angular-ui.github.io/bootstrap/)
-+ [UI Bootstrap](http://angular-ui.github.io/bootstrap/)
-
 
 ## Credits
 [@cortezcristian](https://twitter.com/cortezcristian)
