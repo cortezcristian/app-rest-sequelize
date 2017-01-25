@@ -15,7 +15,6 @@ var csrf = require('csurf');
 var flash = require('connect-flash');
 var session = require('express-session');
 var methodOverride = require('method-override');
-var utils = require('./utils');
 var config = exports.config = require('./config');
 var anyandgo = exports.anyandgo = {};
 var epilogue = require('epilogue');
