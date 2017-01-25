@@ -56,29 +56,6 @@ app.use(function(req, res, next){
 var dbConex = exports.dbConex = utils.dbConnection(config.db.domain,config.db.name,config.db.user,config.db.pass);
 var sequelize = exports.sequelize = require('./db/conn.js');
 
-// Initialize epilogue
-exports.epilogue = epilogue.initialize({
-  app       : app,
-  sequelize : sequelize
-});
-
-var Client = require('./models/clients.js');
-
-// Create REST resource
-var clientResource = epilogue.resource({
-  model: Client,
-  endpoints: ['/api/v1/clients', '/api/v1/clients/:id']
-});
-
-/*
-app.get('/clients', function(req, res){
-  Client.findAll().then(function(result){
-    res.json(result);
-  });
-});
-*/
-
-
 // DB Fixtures
 if (config.fixtures && config.fixtures === "enabled") {
 // Load Fixtures
@@ -222,6 +199,31 @@ app.use(session({ secret: 'secret', saveUninitialized: true, resave: true })); /
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
+
+
+// Initialize epilogue
+exports.epilogue = epilogue.initialize({
+  app       : app,
+  sequelize : sequelize
+});
+
+var Client = require('./models/clients.js');
+
+// Create REST resource
+var clientResource = epilogue.resource({
+  model: Client,
+  endpoints: ['/api/v1/clients', '/api/v1/clients/:idClient']
+});
+
+/*
+app.get('/clients', function(req, res){
+  Client.findAll().then(function(result){
+    res.json(result);
+  });
+});
+*/
+
+
 
 // CSRF Security
 // http://stackoverflow.com/questions/23997572/error-misconfigured-csrf-express-js-4

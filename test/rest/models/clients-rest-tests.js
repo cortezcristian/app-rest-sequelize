@@ -28,7 +28,7 @@ describe('REST API Client '+d+"/api/v1/clients", function(){
         // It show create a new document in the database
         client = Client.build({ name: 'client'+Math.floor((Math.random() * 10) + 1)});
         client.save().then(function(record){
-            clientId = record.get('clientId');
+            clientId = record.get('idClient');
             done()
         }).catch(function(error) {
             done(error);
@@ -60,18 +60,18 @@ describe('REST API Client '+d+"/api/v1/clients", function(){
               .send({ name: 'Test Creation Client' })
               .end(function(res) {
                   assert.ok(res.ok);
-                  console.log(res.body);
                   assert.ok(res.body.name === 'Test Creation Client');
                   done();
               });
         });
         it('PUT /api/v1/clients/:clientId', function(done){
+            console.log("Client ID:", clientId);
             agent
               .put(d+'/api/v1/clients/'+clientId)
               .send({ name: 'Test Change Client' })
               .end(function(res) {
                   assert.ok(res.ok);
-                  console.log(res.body);
+                  console.log("PUT: ", res.body);
                   assert.ok(res.body.name === 'Test Change Client');
                   done();
               });
