@@ -2,14 +2,15 @@
 
 /**
  * @ngdoc function
- * @name anyandgoApp.controller:ClientesNewCtrl
+ * @name anyandgoApp.controller:ClientsNewCtrl
  * @description
- * # ClientesNewCtrl
+ * # ClientsNewCtrl
  * Controller of the anyandgoApp
  */
 angular.module('anyandgoApp')
-  .controller('ClientesNewCtrl', function ($scope, $timeout, $location, Restangular, toastr) {
-  $scope.operatoria = "Alta";
+  .controller('ClientsNewCtrl', function ($scope, $timeout, $location, Restangular, toastr) {
+  $scope.operation = "Create";
+
   $scope.save = function(formData) {
     var data = {};
     angular.forEach(formData, function (value, key) {
@@ -18,15 +19,11 @@ angular.module('anyandgoApp')
         }
     });
 
-    Restangular.all('clientes').post(data).then(function(clientes) {  
-      if(navigator.userAgent.match(/Zombie/)) {
-          document.location.hash = "#/crud/clientes";
-      } else {
-        toastr.info('Alta de Clientes Satisfactoria', 'Operación Exitosa');
-        $timeout(function(){
-             $location.path('/crud/clientes');
-        }, 2000);
-      }
+    Restangular.all('clients').post(data).then(function(clients) {
+      toastr.info('New client was created', 'Operation Success');
+      $timeout(function(){
+         $location.path('/crud/clients');
+      }, 1000);
     });
   }
 });

@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name anyandgoApp.controller:MainCtrl
+ * @name anyandgoApp.controller:ClientsCtrl
  * @description
- * # MainCtrl
+ * # ClientsCtrl
  * Controller of the anyandgoApp
  */
 angular.module('anyandgoApp')
-  .controller('MainCtrl', function ($scope, $timeout, $location,
+  .controller('ClientsCtrl', function ($scope, $timeout, $location,
     $http, $rootScope, $q, $log, $modal, toastr, Restangular) {
 
     // Selection counter

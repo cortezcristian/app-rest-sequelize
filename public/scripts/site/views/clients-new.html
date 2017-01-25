@@ -1,0 +1,71 @@
+
+<header class="top-title-bar">
+    <h3>
+        <i class="fa fa-user fa-fw"></i>
+        {{operatoria}} Clients
+    </h3>
+    <div class="actions">
+        <a class="btn btn-xs btn-default" href="#/crud/clients"><i class="fa fa-th-list"></i> List</a>
+    </div>
+</header>
+
+
+<div style="padding:10px">
+  <form role="form" method="post" name="changeClientsForm" ng-submit="save(changeClientsForm)"  novalidate>
+
+    <div>
+
+      <!-- field name -->
+      <div class="form-group" ng-class="{ 'has-error': changeClientsForm.name.$invalid && changeClientsForm.name.$dirty }">
+          <label for="name" class="label-control"><b>Name:</b></label>
+          <input type="text" ng-model="clients.name"  name="name" id="name" class="form-control" minlength="6" required autofocus />
+          <div class="validation text-danger"
+               ng-messages="changeClientsForm.name.$error"
+               ng-if="changeClientsForm.name.$touched || changeClientsForm.$submitted">
+              <div ng-message="required" ng-show="changeClientsForm.name.$error.required">This field is required</div>
+              <div ng-message="minlength" ng-show="changeClientsForm.name.$error.minlength">It should have at least 6 characters</div>
+          </div>
+      </div>
+      <!-- end field name -->
+
+      <!-- field email -->
+      <div class="form-group" ng-class="{ 'has-error': changeClientsForm.email.$invalid && changeClientsForm.email.$dirty }">
+          <label for="email" class="label-control">Email:</label>
+          <input type="email" ng-model="clients.email" name="email" id="email" class="form-control" minlength="6" />
+          <div class="validation text-danger"
+               ng-messages="changeClientsForm.email.$error"
+               ng-if="changeClientsForm.email.$touched || changeClientsForm.$submitted">
+              <div ng-message="required" ng-show="changeClientsForm.email.$error.required">This field is required</div>
+              <div ng-message="minlength" ng-show="changeClientsForm.email.$error.minlength">It should have at least 6 characters</div>
+              <div ng-message="email" ng-show="changeClientsForm.email.$error.email">Please enter a valid email address</div>
+          </div>
+      </div>
+      <!-- end field email -->
+
+      <!-- field phone -->
+      <div class="form-group" ng-class="{ 'has-error': changeClientsForm.phone.$invalid && changeClientsForm.phone.$dirty }">
+          <label for="phone" class="label-control">Teléfono:</label>
+          <input type="text" ng-model="clients.phone" name="phone" id="phone" class="form-control" minlength="6" />
+          <div class="validation text-danger"
+               ng-messages="changeClientsForm.phone.$error"
+               ng-if="changeClientsForm.phone.$touched || changeClientsForm.$submitted">
+              <div ng-message="required" ng-show="changeClientsForm.phone.$error.required">This field is required</div>
+              <div ng-message="minlength" ng-show="changeClientsForm.phone.$error.minlength">It should have at least 6 characters</div>
+          </div>
+      </div>
+      <!-- end field phone -->
+
+
+      <div class="form-group top-title-bar inner">
+
+          <a href="#/crud/clients" ng-click="cancel($event);" class="btn btn-default btn-width-min">Cancel</a>
+
+          <button type="submit" class="btn btn-primary btn-width-min" ng-disabled="changeClientsForm.$invalid">Save</button>
+      </div>
+    </div>
+      <!--
+      <pre>changeClientsForm.$error: {{  changeClientsForm.$error | json }}</pre>
+      <pre>changeClientsForm: {{  changeClientsForm | json }}</pre>
+      -->
+  </form>
+</div>

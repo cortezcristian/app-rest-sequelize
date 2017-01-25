@@ -54,7 +54,20 @@ angular
     $routeProvider
       .when('/', {
         templateUrl: '/scripts/site/views/clients.html',
-        controller: 'MainCtrl'
+        controller: 'ClientsCtrl'
+      })
+      .when('/crud/clients-new', {
+        templateUrl: '/scripts/site/views/clients-new.html',
+        controller: 'ClientsNewCtrl'
+      })
+      .when('/crud/clients-edit/:id', {
+        templateUrl: '/scripts/site/views/clients-new.html',
+        controller: 'ClientsEditCtrl',
+        resolve: {
+          clients: function(Restangular, $route){
+            return Restangular.one('clients', $route.current.params.id).get();
+          }
+        }
       })
       .otherwise({
         redirectTo: '/'
