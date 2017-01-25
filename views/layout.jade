@@ -30,15 +30,13 @@ html(lang='en',ng-app="anyandgoApp")
     - if(settings.envflag !== "production") {
     //-<!-- build:css(public) styles/site-styles.min.css -->
     //bower:css
-    link(rel='stylesheet', href='/components/metisMenu/dist/metisMenu.css')
-    link(rel='stylesheet', href='/components/angular-toggle-switch/angular-toggle-switch.css')
     link(rel='stylesheet', href='/components/perfect-scrollbar/css/perfect-scrollbar.css')
     link(rel='stylesheet', href='/components/components-font-awesome/css/font-awesome.css')
-    link(rel='stylesheet', href='/components/prism/themes/prism.css')
     link(rel='stylesheet', href='/components/animate.css/animate.css')
+    link(rel='stylesheet', href='/components/angular-ui-grid/ui-grid.css')
+    link(rel='stylesheet', href='/components/angular-toastr/dist/angular-toastr.css')
     link(rel='stylesheet', href='/components/angular-hotkeys/build/hotkeys.css')
     //endbower
-    link(rel='stylesheet', href='/components/prism/themes/prism-okaidia.css')
     //-<!-- endbuild -->
     - } else {
     link(rel='stylesheet', href='/dist/styles/site-styles.min.css')
@@ -81,7 +79,6 @@ html(lang='en',ng-app="anyandgoApp")
     script(src='/components/angular/angular.js')
     script(src='/components/angular-bootstrap/ui-bootstrap-tpls.js')
     script(src='/components/bootstrap/dist/js/bootstrap.js')
-    script(src='/components/metisMenu/dist/metisMenu.js')
     script(src='/components/lodash/dist/lodash.compat.js')
     script(src='/components/restangular/dist/restangular.js')
     script(src='/components/angular-resource/angular-resource.js')
@@ -90,15 +87,9 @@ html(lang='en',ng-app="anyandgoApp")
     script(src='/components/angular-animate/angular-animate.js')
     script(src='/components/angular-touch/angular-touch.js')
     script(src='/components/angular-route/angular-route.js')
-    script(src='/components/angular-toggle-switch/angular-toggle-switch.js')
-    script(src='/components/waypoints/lib/noframework.waypoints.js')
-    script(src='/components/perfect-scrollbar/js/perfect-scrollbar.jquery.js')
     script(src='/components/perfect-scrollbar/js/perfect-scrollbar.js')
-    script(src='/components/jquery.scrollTo/jquery.scrollTo.js')
-    script(src='/components/prism/prism.js')
-    script(src='/components/gsap/src/uncompressed/TweenMax.js')
-    script(src='/components/ngFx/dist/ngFx.js')
-    script(src='/components/angular-youtube-mb/src/angular-youtube-embed.js')
+    script(src='/components/angular-ui-grid/ui-grid.js')
+    script(src='/components/angular-toastr/dist/angular-toastr.tpls.js')
     script(src='/components/angular-hotkeys/build/hotkeys.js')
     //endbower
     //-<!-- endbuild -->
