@@ -43,17 +43,20 @@ var providerResource = epilogue.resource({
   endpoints: ['/api/v1/providers', '/api/v1/providers/:id']
 });
 
-sequelize.sync({force:true});
+var clientproviderResource = epilogue.resource({
+  model: ClientProviders,
+  endpoints: ['/api/v1/clientproviders', '/api/v1/clientproviders/:id']
+});
 
 /*
-app.get('/clients', function(req, res){
+app.get('/api/v1/add-providers-to-clients/:clienId/:csvList', function(req, res){
   Client.findAll().then(function(result){
     res.json(result);
   });
 });
 */
 
-
+sequelize.sync({force:true});
 
 
 // CORS Interceptors
