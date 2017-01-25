@@ -58,11 +58,11 @@ $ grunt test --force
 
 - Models:
   - Client [models/clients.js](./models/clients.js)
-  - Client Unit Test [test/unit/models/providers-tests.js](./test/unit/models/providers-tests.js)
+  - Client Unit Test [test/unit/models/clients-tests.js](./test/unit/models/clients-tests.js)
   - Provider [models/providers.js](./models/providers.js)
   - Provider Unit Test [test/unit/models/providers-tests.js](./test/unit/models/providers-tests.js)
 - Rest:
-  - Client Rest Test [test/rest/models/providers-tests.js](./test/rest/models/providers-tests.js)
+  - Client Rest Test [test/rest/models/clients-tests.js](./test/rest/models/clients-tests.js)
 
 ### Frontend
 
