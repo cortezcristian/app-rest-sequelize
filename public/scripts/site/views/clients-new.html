@@ -44,7 +44,7 @@
 
       <!-- field phone -->
       <div class="form-group" ng-class="{ 'has-error': changeClientsForm.phone.$invalid && changeClientsForm.phone.$dirty }">
-          <label for="phone" class="label-control">Teléfono:</label>
+          <label for="phone" class="label-control">Phone:</label>
           <input type="text" ng-model="clients.phone" name="phone" id="phone" class="form-control" minlength="6" />
           <div class="validation text-danger"
                ng-messages="changeClientsForm.phone.$error"
@@ -57,6 +57,7 @@
 
       <!-- field providers -->
       <div class="form-group">
+          <label class="label-control">Providers:</label>
         <div providers-checklist></div>
       </div>
       <!-- end field providers -->

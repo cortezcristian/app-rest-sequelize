@@ -68,7 +68,6 @@ angular
         controller: 'ClientsEditCtrl',
         resolve: {
           clients: function(Restangular, $route){
-            debugger;
             return Restangular.one('clients', $route.current.params.id).get();
           }
         }
