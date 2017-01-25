@@ -10,7 +10,7 @@
 // * config
 var app = module.parent.exports.app,
   config = module.parent.exports.config,
-  sequelize = module.parent.exports.sequelize,
+  sequelize = exports.sequelize = module.parent.exports.sequelize,
   epilogue = module.parent.exports.epilogue,
   logger = module.parent.exports.logger;
 // ## Models
@@ -20,8 +20,6 @@ var Client  = require('../models/clients.js'),
 
 // ## Public Rest
 // --------------------------------------
-
-exports.sequelize = sequelize;
 
 // Initialize epilogue
 epilogue.initialize({
