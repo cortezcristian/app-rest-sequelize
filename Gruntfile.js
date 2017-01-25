@@ -91,6 +91,7 @@ module.exports = function (grunt) {
       }
     },
     wiredep: {
+      /*
       admin: {
         src: ['views/layout-admin.jade'],
         options: {
@@ -101,6 +102,7 @@ module.exports = function (grunt) {
           }
         }
       },
+      */
       site: {
         src: ['views/layout.jade'],
         options: {
