@@ -18,7 +18,6 @@ var session = require('express-session');
 var methodOverride = require('method-override');
 var utils = require('./utils');
 var config = exports.config = require('./config');
-var mail = exports.mail = require('./utils/mailer.js');
 var anyandgo = exports.anyandgo = {};
 var User = require('./models/user.js');
 
@@ -267,7 +266,7 @@ app.use(function(req, res, next) {
 
 // Routes
 require('./routes/auth');
-require('./routes/main');
+require('./routes/apis');
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

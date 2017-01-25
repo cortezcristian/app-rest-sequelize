@@ -24,6 +24,16 @@
               </a>
             
               
+              <a class="source" href="clients.html">
+                clients.js
+              </a>
+            
+              
+              <a class="source" href="providers.html">
+                providers.js
+              </a>
+            
+              
               <a class="source" href="sample.html">
                 sample.js
               </a>
@@ -34,6 +44,11 @@
               </a>
             
               
+              <a class="source" href="apis.html">
+                apis.js
+              </a>
+            
+              
               <a class="source" href="auth.html">
                 auth.js
               </a>
@@ -41,11 +56,6 @@
               
               <a class="source" href="main.html">
                 main.js
-              </a>
-            
-              
-              <a class="source" href="samples-crud-tests.html">
-                samples-crud-tests.js
               </a>
             
               
@@ -71,6 +81,16 @@
               
               <a class="source" href="admins-tests.html">
                 admins-tests.js
+              </a>
+            
+              
+              <a class="source" href="clients-tests.html">
+                clients-tests.js
+              </a>
+            
+              
+              <a class="source" href="providers-tests.html">
+                providers-tests.js
               </a>
             
               
@@ -215,7 +235,7 @@ d = <span class="hljs-string">'http://'</span>+config.app.domain+<span class="hl
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        user = <span class="hljs-keyword">new</span> User({ name: <span class="hljs-string">'user'</span>+<span class="hljs-built_in">Math</span>.floor((<span class="hljs-built_in">Math</span>.random() * <span class="hljs-number">10</span>) + <span class="hljs-number">1</span>)});
+            <div class="content"><div class='highlight'><pre>        user = <span class="hljs-keyword">new</span> User({ <span class="hljs-attr">name</span>: <span class="hljs-string">'user'</span>+<span class="hljs-built_in">Math</span>.floor((<span class="hljs-built_in">Math</span>.random() * <span class="hljs-number">10</span>) + <span class="hljs-number">1</span>)});
         user.save(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, doc</span>)</span>{
             userId = doc._id;    
         });</pre></div></div>
@@ -265,7 +285,7 @@ d = <span class="hljs-string">'http://'</span>+config.app.domain+<span class="hl
             
             <div class="content"><div class='highlight'><pre>        agent
           .post(d+<span class="hljs-string">'/admin'</span>)
-          .send({ email: <span class="hljs-string">"admin@anyandgo.com"</span>, password: <span class="hljs-string">"123456"</span> })
+          .send({ <span class="hljs-attr">email</span>: <span class="hljs-string">"admin@anyandgo.com"</span>, <span class="hljs-attr">password</span>: <span class="hljs-string">"123456"</span> })
           .end(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>{
               assert.ok(res.ok);
               done();
@@ -294,7 +314,7 @@ d = <span class="hljs-string">'http://'</span>+config.app.domain+<span class="hl
         it(<span class="hljs-string">'POST /api/v1/users'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>)</span>{
             agent
               .post(d+<span class="hljs-string">'/api/v1/users'</span>)
-              .send({ name: <span class="hljs-string">'Test Creation User'</span> })
+              .send({ <span class="hljs-attr">name</span>: <span class="hljs-string">'Test Creation User'</span> })
               .end(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>{
                   assert.ok(res.ok);
                   assert.ok(res.body.name === <span class="hljs-string">'Test Creation User'</span>);
@@ -304,7 +324,7 @@ d = <span class="hljs-string">'http://'</span>+config.app.domain+<span class="hl
         it(<span class="hljs-string">'PUT /api/v1/users/:userId'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>)</span>{
             agent
               .put(d+<span class="hljs-string">'/api/v1/users/'</span>+userId)
-              .send({ name: <span class="hljs-string">'Test Change User'</span> })
+              .send({ <span class="hljs-attr">name</span>: <span class="hljs-string">'Test Change User'</span> })
               .end(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>{
                   assert.ok(res.ok);
                   assert.ok(res.body.name === <span class="hljs-string">'Test Change User'</span>);
