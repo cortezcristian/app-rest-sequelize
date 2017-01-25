@@ -10,8 +10,8 @@ Sequelize Express Angular App [![Build Status](https://travis-ci.org/cortezcrist
 - [Deliverables](#deliverables)
   - [Backend](#backend)
   - [Frontend](#backend)
-- [Docs](#docs)
-	- [Demo](#demo)
+- [Documentation](#Documentation)
+	- [Docs](#docs)
 	- [Logs](#logs)
 
 ## Usage
@@ -64,6 +64,16 @@ $ grunt test --force
 - Rest:
 
 ### Frontend
+
+## Documentation
+
+### Docs
+
+Documentation can be access via the links on the top menu.
+
+- Model were documented with docco
+- Rest APIs were documente with apidoc
+- Angular was documented with docular
 
 ### Logs
 - Kickstart

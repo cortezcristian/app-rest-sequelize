@@ -19,6 +19,7 @@ var methodOverride = require('method-override');
 var utils = require('./utils');
 var config = exports.config = require('./config');
 var anyandgo = exports.anyandgo = {};
+var epilogue = require('epilogue');
 var User = require('./models/user.js');
 
 // Anyandgo
@@ -54,13 +55,28 @@ app.use(function(req, res, next){
 // Database Connection
 var dbConex = exports.dbConex = utils.dbConnection(config.db.domain,config.db.name,config.db.user,config.db.pass);
 var sequelize = exports.sequelize = require('./db/conn.js');
+
+// Initialize epilogue
+exports.epilogue = epilogue.initialize({
+  app       : app,
+  sequelize : sequelize
+});
+
 var Client = require('./models/clients.js');
 
+// Create REST resource
+var clientResource = epilogue.resource({
+  model: Client,
+  endpoints: ['/api/v1/clients', '/api/v1/clients/:id']
+});
+
+/*
 app.get('/clients', function(req, res){
   Client.findAll().then(function(result){
     res.json(result);
   });
 });
+*/
 
 
 // DB Fixtures

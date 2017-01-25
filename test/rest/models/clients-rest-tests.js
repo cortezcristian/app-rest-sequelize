@@ -45,12 +45,12 @@ describe('REST API Client '+d+"/api/v1/clients", function(){
                   done();
               });
         });
-        it('GET /api/v1/clients/count', function(done){
+        it('GET /api/v1/clients?count=1', function(done){
             agent
-              .get(d+'/api/v1/clients/count')
+              .get(d+'/api/v1/clients?count=1')
               .end(function(res) {
                   assert.ok(res.ok);
-                  assert.ok(res.body.count > 0);
+                  assert.ok(res.body.length === 1);
                   done();
               });
         });
@@ -60,6 +60,7 @@ describe('REST API Client '+d+"/api/v1/clients", function(){
               .send({ name: 'Test Creation Client' })
               .end(function(res) {
                   assert.ok(res.ok);
+                  console.log(res.body);
                   assert.ok(res.body.name === 'Test Creation Client');
                   done();
               });
@@ -70,6 +71,7 @@ describe('REST API Client '+d+"/api/v1/clients", function(){
               .send({ name: 'Test Change Client' })
               .end(function(res) {
                   assert.ok(res.ok);
+                  console.log(res.body);
                   assert.ok(res.body.name === 'Test Change Client');
                   done();
               });
@@ -79,15 +81,7 @@ describe('REST API Client '+d+"/api/v1/clients", function(){
               .del(d+'/api/v1/clients/'+clientId)
               .end(function(res) {
                   assert.ok(res.ok);
-                  assert.ok(JSON.stringify(res.body) === '{}');
-                  done();
-              });
-        });
-        it('DELETE /api/v1/clients', function(done){
-            agent
-              .del(d+'/api/v1/clients/')
-              .end(function(res) {
-                  assert.ok(res.ok);
+                  console.log(res.body);
                   assert.ok(JSON.stringify(res.body) === '{}');
                   done();
               });

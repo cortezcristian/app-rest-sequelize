@@ -3,17 +3,18 @@
 // contains all the routes of the site including pages, and rest api services.
 //
 // 1. Public Routes
-// 2. Admin Routes
+// 2. Rest Routes
 //
 // requires
 // * app
 // * config
 var app = module.parent.exports.app,
   config = module.parent.exports.config,
-  logger = module.parent.exports.logger,
+  sequelize = module.parent.exports.sequelize,
+  logger = module.parent.exports.logger;
   // ## Models
-  /* models:start */
-  Client  = require('../models/clients.js'),
+  /*
+  var Client  = require('../models/clients.js'),
   Provider  = require('../models/providers.js');
   /* models:end */
 
