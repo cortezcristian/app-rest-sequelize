@@ -33,28 +33,73 @@ epilogue.initialize({
 });
 
 // Create REST resources
+
+/**
+ * @api {get} /clients Request Clients List
+ * @apiName findAll
+ * @apiGroup Clients
+ *
+ * @apiExample {curl} Example usage:
+ *     curl -i http://localhost:3000/api/v1/clients
+ *
+ * @apiSuccess {Array} List of clients objects
+ */
 var clientResource = epilogue.resource({
   model: Client,
   endpoints: ['/api/v1/clients', '/api/v1/clients/:id']
 });
 
+/**
+ * @api {get} /providers Request Providers List
+ * @apiName findAll
+ * @apiGroup Providers
+ *
+ * @apiExample {curl} Example usage:
+ *     curl -i http://localhost:3000/api/v1/providers
+ *
+ * @apiSuccess {Array} List of providers objects
+ */
 var providerResource = epilogue.resource({
   model: Provider,
   endpoints: ['/api/v1/providers', '/api/v1/providers/:id']
 });
 
+/**
+ * @api {get} /clientproviders Request ClientProviders List
+ * @apiName findAll
+ * @apiGroup RelationClientProviders
+ *
+ * @apiExample {curl} Example usage:
+ *     curl -i http://localhost:3000/api/v1/clientproviders
+ *
+ * @apiSuccess {Array} List of relationships between client and providers
+ */
 var clientproviderResource = epilogue.resource({
   model: ClientProviders,
   endpoints: ['/api/v1/clientproviders', '/api/v1/clientproviders/:id']
 });
 
-/*
+/**
+ * @api {get} /add-providers-to-clients/:clienId/:csvList Save Client Providers Relationships
+ * @apiName saveClientProvidersRelationships
+ * @apiGroup RelationClientProviders
+ *
+ * @apiExample {curl} Example usage:
+ *     curl -i http://localhost:3000/api/v1/add-providers-to-clients/c
+ *
+ * @apiSuccess {Array} List of relationships between client and providers
+ */
 app.get('/api/v1/add-providers-to-clients/:clienId/:csvList', function(req, res){
+  // find the client by id
+  // start finding the providers
+  // create record in relationship table
+	res.json({});
+/*
   Client.findAll().then(function(result){
     res.json(result);
   });
-});
 */
+});
 
 sequelize.sync({force:true});
 
