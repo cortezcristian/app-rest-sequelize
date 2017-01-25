@@ -9,7 +9,6 @@ var winston = require('winston');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var stylus = require('stylus');
-var i18n = require('i18n');
 var helmet = require('helmet');
 var csrf = require('csurf');
 var flash = require('connect-flash');
@@ -62,21 +61,6 @@ if (config.security && config.security === "enabled") {
     app.use(helmet.noSniff());
     app.use(helmet.frameguard('deny'));
 }
-
-// i18n setup
-i18n.configure({
-  // setup some locales: other locales default to en silently
-  locales:[
-      //global:translation:start
-      //global:translation:end
-      'en-us',
-      'es-ar'],
-  // sets a custom cookie name to parse locale settings from  - defaults to NULL
-  cookie: 'lang',
-  // where to store json files - defaults to './locales' relative to modules directory
-  directory: __dirname + '/locales',
-  defaultLocale: 'es-ar'
-});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -185,9 +169,8 @@ app.use(cookieParser());
 
 
 app.use(express.static(path.join(__dirname, 'public')));
-// i18n init parses req for language headers, cookies, etc.
-app.use(i18n.init);
-// Passport
+
+// Session
 app.use(session({ secret: 'secret', saveUninitialized: true, resave: true })); // session secret
 app.use(flash()); // use connect-flash for flash messages stored in session
 
