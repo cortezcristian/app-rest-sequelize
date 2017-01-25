@@ -88,6 +88,8 @@ In order to gain velocity project was generated with [cortezcristian/anyandgo](h
 Simplify structure and update dependencies, tweak test suite, integrate ci
 - [PR#2](https://github.com/cortezcristian/app-rest-sequelize/pull/2)
 Build APIs, create rest tests initially, implement epilogue and make them pass
+- [PR#3](https://github.com/cortezcristian/app-rest-sequelize/pull/3)
+Create SPA using AngularJS, add jasmine tests
 
 ### Notes
 
