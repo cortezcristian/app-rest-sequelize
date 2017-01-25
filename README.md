@@ -32,23 +32,32 @@ $ npm install -g grunt-cli bower mocha
 Being on the main project folder run:
 
 ```
+$ git clone git@github.com:cortezcristian/app-rest-sequelize.git
+$ cd app-rest-sequelize
 $ npm i & bower i && grunt
 ```
 
 ### Development
 
-Run `grunt` for building and `grunt serve` for preview.
+Run `grunt` for start developer mode.
 
 ```
-$ grunt serve --force
+$ grunt
 ```
 
 ### Testing
 
-Run models unit tests
+You run different kind of tests. In example to run the unit tests:
 
 ```
 $ mocha test/unit
+```
+
+Test the rest api enpoints:
+
+```
+$ npm start & # start the server first
+$ mocha test/rest
 ```
 
 Running `grunt test` will run the unit tests with karma.
@@ -94,11 +103,15 @@ Create SPA using AngularJS, add jasmine tests
 ### Notes
 
 Facts about this implementation:
-- Jade template engine
+- About databases: the current project uses sqlite for local and testing environments. And mysql for staging and production, please feel free to modify the configuration under the config folder. In this way we achieve flexibility and local development can be made with one db or the other.
+- The project uses Express and Epilogue to leverage the API Rest servicies.
+- All database comunicatoin is being handled with the Sequelize ORM.
+- The front-end is a SPA, the index.html was converted into index.jade because different enviroments load different assets. In example production load only minified and optimized scripts while development env loads the full sources.
+- This app relies on Bootstrap and Stylus to manage the styles of the SPA.
+- Big part of the initial code was generated with a mean framework I have built [repo cortezcristian/anyandgo](https://github.com/cortezcristian/anyandgo), just stripped parts of it that were not needed and hacked it to work with relational databases.
 
 Modules added:
 + [Stylus](http://learnboost.github.io/stylus/)
-+ [i18n](https://github.com/mashpie/i18n-node)
 
 Front end assets:
 + [Bootstrap](http://angular-ui.github.io/bootstrap/)
