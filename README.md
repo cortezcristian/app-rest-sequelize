@@ -99,7 +99,9 @@ Simplify structure and update dependencies, tweak test suite, integrate ci
 - [PR#2](https://github.com/cortezcristian/app-rest-sequelize/pull/2)
 Build APIs, create rest tests initially, implement epilogue and make them pass
 - [PR#3](https://github.com/cortezcristian/app-rest-sequelize/pull/3)
-Create SPA using AngularJS, add jasmine tests
+Create SPA using AngularJS, added controllers, views, etc.
+- [PR#4](https://github.com/cortezcristian/app-rest-sequelize/pull/4)
+Refactoring, global configurations, user experience, added jasmine tests
 
 ### Notes
 
