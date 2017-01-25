@@ -146,107 +146,64 @@ body
 
 }
 
-/* Twitter Bootstrap 3.2.0 Callout CSS Styles */
-/* http://cpratt.co/twitter-bootstrap-callout-css-styles/ */
-.bs-callout {
-    padding: 20px;
-    margin: 20px 0;
-    border: 1px solid #eee;
-    border-left-width: 5px;
-    border-radius: 3px;
+/* Animated radios & checkboxes (noJS)
+ Credits: http://bootsnipp.com/snippets/featured/animated-radios-amp-checkboxes-nojs
+*/
+.checkbox label:after,
+.radio label:after {
+    content: '';
+    display: table;
+    clear: both;
 }
-.bs-callout h4 {
-    margin-top: 0;
-    margin-bottom: 5px;
+
+.checkbox .cr,
+.radio .cr {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #a9a9a9;
+    border-radius: .25em;
+    width: 1.3em;
+    height: 1.3em;
+    float: left;
+    margin-right: .5em;
 }
-.bs-callout p:last-child {
-    margin-bottom: 0;
+
+.radio .cr {
+    border-radius: 50%;
 }
-.bs-callout code {
-    border-radius: 3px;
+
+.checkbox .cr .cr-icon,
+.radio .cr .cr-icon {
+    position: absolute;
+    font-size: .8em;
+    line-height: 0;
+    top: 50%;
+    left: 20%;
 }
-.bs-callout+.bs-callout {
-    margin-top: -5px;
+
+.radio .cr .cr-icon {
+    margin-left: 0.04em;
 }
-.bs-callout-default {
-    border-left-color: #777;
+
+.checkbox label input[type="checkbox"],
+.radio label input[type="radio"] {
+    display: none;
 }
-.bs-callout-default h4 {
-    color: #777;
+
+.checkbox label input[type="checkbox"] + .cr > .cr-icon,
+.radio label input[type="radio"] + .cr > .cr-icon {
+    transform: scale(3) rotateZ(-20deg);
+    opacity: 0;
+    transition: all .3s ease-in;
 }
-.bs-callout-primary {
-    border-left-color: #428bca;
+
+.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
+.radio label input[type="radio"]:checked + .cr > .cr-icon {
+    transform: scale(1) rotateZ(0deg);
+    opacity: 1;
 }
-.bs-callout-primary h4 {
-    color: #428bca;
-}
-.bs-callout-success {
-    border-left-color: #5cb85c;
-}
-.bs-callout-success h4 {
-    color: #5cb85c;
-}
-.bs-callout-danger {
-    border-left-color: #d9534f;
-}
-.bs-callout-danger h4 {
-    color: #d9534f;
-}
-.bs-callout-warning {
-    border-left-color: #f0ad4e;
-}
-.bs-callout-warning h4 {
-    color: #f0ad4e;
-}
-.bs-callout-info {
-    border-left-color: #5bc0de;
-}
-.bs-callout-info h4 {
-    color: #5bc0de;
-}
-/* Metis Menu */
-.sidebar-nav {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-  background-image: -webkit-linear-gradient(left, color-stop(#333333 10px), color-stop(#222222 10px));
-  background-image: linear-gradient(to right, #333333 10px, #222222 10px);
-  background-repeat: repeat-x;
-}
-.sidebar-nav ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-.sidebar-nav a, .sidebar-nav a:hover, .sidebar-nav a:focus, .sidebar-nav a:active {
-  outline: none;
-}
-.sidebar-nav ul li, .sidebar-nav ul a {
-  display: block;
-}
-.sidebar-nav ul a {
-  padding: 10px 20px;
-  color: #aaa;
-  border-top: 1px solid rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.05) inset;
-  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5);
-}
-.sidebar-nav ul li ul li ul li a {
-  background: rgba(93, 93, 93, 0.54);
-}
-.sidebar-nav ul a:hover, .sidebar-nav ul a:focus, .sidebar-nav ul a:active {
-  color: #fff;
-  text-decoration: none;
-}
-.sidebar-nav ul ul a {
-  padding: 10px 30px;
-  background-color: rgba(255, 255, 255, 0.1);
-}
-.sidebar-nav .nav > li > a:hover, .sidebar-nav .nav > li > a:active, .sidebar-nav .nav > li > a:focus,
-.sidebar-nav ul ul a:hover, .sidebar-nav ul ul a:focus, .sidebar-nav ul ul a:active {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-.sidebar-nav-item {
-  padding-left: 5px;
-}
-.sidebar-nav-item-icon {
-  padding-right: 5px;
+
+.checkbox label input[type="checkbox"]:disabled + .cr,
+.radio label input[type="radio"]:disabled + .cr {
+    opacity: .5;
 }
