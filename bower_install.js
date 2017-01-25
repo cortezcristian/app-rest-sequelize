@@ -14,6 +14,7 @@ bower.commands
 .on('end', function (installed) {
     console.log(installed);
     console.log("Finish Installing Site Components")
+    /*
     try {
       process.chdir(path.resolve(".")+"/public/scripts/admin/");
       console.log('New directory: ' + process.cwd());
@@ -31,5 +32,6 @@ bower.commands
         console.log("Installing admin panel dependencies")
         console.log(installed);
     });
+    */
 });
 
