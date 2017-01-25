@@ -16,7 +16,11 @@ var app = module.parent.exports.app,
 // ## Models
 var Client  = require('../models/clients.js'),
   Provider  = require('../models/providers.js');
-  /* models:end */
+
+// Setup: Belongs-To-Many associations
+// http://docs.sequelizejs.com/en/latest/docs/associations/#belongs-to-many-associations
+Client.belongsToMany(Provider, {through: 'ClientProviders'});
+Provider.belongsToMany(Client, {through: 'ClientProviders'});
 
 // ## Public Rest
 // --------------------------------------
