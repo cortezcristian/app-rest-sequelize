@@ -15,14 +15,34 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
+    'ui.grid',
+    'ui.grid.expandable',
+    'ui.grid.selection',
+    'ui.grid.pinning',
+    'ui.grid.pagination',
+    'ui.grid.edit',
+    'ui.grid.cellNav',
     'cfp.hotkeys',
+    'toastr',
     'restangular'
   ])
-  .config(function ($routeProvider, $locationProvider, RestangularProvider, hotkeysProvider) {
+  .config(function ($routeProvider, $locationProvider, RestangularProvider, hotkeysProvider, toastrConfig) {
 
     // Hotkeys killswitch
     // see https://github.com/chieffancypants/angular-hotkeys#configuration
     hotkeysProvider.includeCheatSheet = true;
+
+    // Toastr Configuration
+    angular.extend(toastrConfig, {
+      autoDismiss: false,
+      containerId: 'toast-container',
+      maxOpened: 0,
+      newestOnTop: true,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: false,
+      preventOpenDuplicates: false,
+      target: 'body'
+    });
 
     //$locationProvider.html5Mode(true).hashPrefix('!');
     //$cookies.lang = "en-us";
