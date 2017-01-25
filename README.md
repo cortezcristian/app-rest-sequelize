@@ -3,18 +3,23 @@ Sequelize Express Angular App [![Build Status](https://travis-ci.org/cortezcrist
 
 
 - [Usage](#usage)
+  - [User Experience](#User Experience)
+- [Setup](#Setup)
 	- [Installation](#installation)
 	- [Development](#development)
 	- [Testing](#testing)
-	- [User Experience](#User Experience)
 - [Deliverables](#deliverables)
   - [Backend](#backend)
   - [Frontend](#backend)
 - [Documentation](#Documentation)
-	- [Docs](#docs)
-	- [Logs](#logs)
+  - [Docs](#docs)
+  - [Logs](#logs)
+  - [Notes](#notes)
+  - [Credits](#credits)
 
 ## Usage
+
+## Setup
 
 ### Installation
 
@@ -84,20 +89,19 @@ Simplify structure and update dependencies, tweak test suite, integrate ci
 - [PR#2](https://github.com/cortezcristian/app-rest-sequelize/pull/2)
 Build APIs, create rest tests initially, implement epilogue and make them pass
 
-## Express 4.x
+### Notes
+
 Facts about this implementation:
 - Jade template engine
 
 Modules added:
 + [Stylus](http://learnboost.github.io/stylus/)
 + [i18n](https://github.com/mashpie/i18n-node)
-+ [Mongoose](http://mongoosejs.com/)
-+ [Express-Restify-Mongoose](https://github.com/florianholzapfel/express-restify-mongoose)
 
 Front end assets:
 + [Bootstrap](http://angular-ui.github.io/bootstrap/)
 + [UI Bootstrap](http://angular-ui.github.io/bootstrap/)
 
 
-## Credits
+### Credits
 [@cortezcristian](https://twitter.com/cortezcristian)
