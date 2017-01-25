@@ -1,6 +1,7 @@
 // Database Connection
 // -----------------------------
 
+/* TODO: redo after mysql configuration
 // Require basic config files and DB connection
 var config = require('../../../config'),
     utils = require('../../../utils')
@@ -27,13 +28,14 @@ describe('Database Test', function(){
                 new Admin(connection.db).listDatabases(function(err, result) {
                     if(!err){
                         // database list stored in result.databases
-                        var allDatabases = result.databases;    
+                        var allDatabases = result.databases;
                         done();
                     } else {
                        throw new Error('Unable to list DB');
-                    } 
+                    }
                 });
             });
         });
     });
 });
+*/

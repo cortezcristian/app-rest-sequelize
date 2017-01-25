@@ -7,7 +7,7 @@ module.exports = function (grunt) {
   var appconf = {
     dist: {
       public: "./public/dist/scripts",
-      admin: "./public/dist/scripts/admin" 
+      admin: "./public/dist/scripts/admin"
     }
   };
 
@@ -35,7 +35,7 @@ module.exports = function (grunt) {
         options: { livereload: 35729 },
         files: ['./app.js', './Gruntfile.js', './bin/www',
         './models/*.js', './routes/*.js', './forms/*.js'],
-        tasks: ['jshint','mochaTest','docco'],
+        tasks: ['jshint','mochaTest'],
         options: {
             debounceDelay: 750
         }
@@ -43,7 +43,7 @@ module.exports = function (grunt) {
       tests: {
         options: { livereload: 35729 },
         files: ['./test/**/*.js'],
-        tasks: ['mochaTest', 'docco']
+        tasks: ['mochaTest']
       },
       public: {
         files: ['./public/scripts/**/*', './public/css/**/*', './views/**/*.jade', './views/**/*.styl'],
@@ -67,7 +67,7 @@ module.exports = function (grunt) {
             script: './bin/www',
             options: {
                 ignore: [
-                    'node_modules/**', 
+                    'node_modules/**',
                     'public/js/**/*',
                     'public/scripts/**/*'],
                 callback: function (nodemon) {
@@ -201,7 +201,7 @@ module.exports = function (grunt) {
               var mainroutes = grunt.file.read(filename);
               var regexpm = new RegExp(".*"+appendm.replace("(", "\\(").replace(")","\\)")+".*");
               if(!mainroutes.match(regexpm)){
-                  grunt.file.write(filename, 
+                  grunt.file.write(filename,
                       mainroutes.replace("/* models:end */",appendm+"  /* models:end */"));
               }
 
@@ -215,7 +215,7 @@ module.exports = function (grunt) {
               var mainroutes = grunt.file.read(filename);
               var regexpm = new RegExp(".*"+appendm.replace("(", "\\(").replace(")","\\)")+".*");
               if(!mainroutes.match(regexpm)){
-                  grunt.file.write(filename, 
+                  grunt.file.write(filename,
                       mainroutes.replace("/* models:registration:end */",appendm));
               }
 
@@ -263,14 +263,14 @@ module.exports = function (grunt) {
               // create Front-end files
               var feFilesRoot = {
                 "templates" : "./templates/crud/admin/controllers/",
-                "destination" : "./public/scripts/admin/controllers/"  
+                "destination" : "./public/scripts/admin/controllers/"
               };
               var feFiles = {
                   "model-edit-js.tpl" : "<%=modelname%>-edit.js",
                   "model-new-js.tpl" : "<%=modelname%>-new.js",
                   "model-js.tpl" : "<%=modelname%>.js",
                   "../views/model-html.tpl" : "../views/<%=modelname%>.html"
-              }; 
+              };
 
               for(var i in feFiles){
                   var filefetemp = feFilesRoot.templates+i;
@@ -311,7 +311,7 @@ module.exports = function (grunt) {
               grunt.file.write(filenamecroute, maincroute.replace(".otherwise({",appendcroute));
 
               // create tests
-              
+
               /*
               var appendp = grunt.template.process(grunt.file.read('./templates/append-model-rest-main.tpl'), {
                     data: {
@@ -373,7 +373,7 @@ module.exports = function (grunt) {
               var appendm = "li\n";
                   appendm += "              a(href='#', langsupport='"+arg2.toLowerCase()+"') "+arg2.toLowerCase()+"\n";
                   appendm += "            //public:translation:menu:end";
-              
+
               var filename = './views/partials/site-menu.jade';
               var mainroutes = grunt.file.read(filename);
               grunt.file.write(filename, mainroutes.replace("//public:translation:menu:end",appendm));

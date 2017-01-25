@@ -24,6 +24,16 @@
               </a>
             
               
+              <a class="source" href="clients.html">
+                clients.js
+              </a>
+            
+              
+              <a class="source" href="providers.html">
+                providers.js
+              </a>
+            
+              
               <a class="source" href="sample.html">
                 sample.js
               </a>
@@ -31,6 +41,11 @@
               
               <a class="source" href="user.html">
                 user.js
+              </a>
+            
+              
+              <a class="source" href="apis.html">
+                apis.js
               </a>
             
               
@@ -44,23 +59,18 @@
               </a>
             
               
-              <a class="source" href="samples-crud-tests.html">
-                samples-crud-tests.js
-              </a>
-            
-              
               <a class="source" href="server.html">
                 server.js
               </a>
             
               
-              <a class="source" href="samples-rest-tests.html">
-                samples-rest-tests.js
+              <a class="source" href="clients--rest-tests.html">
+                clients--rest-tests.js
               </a>
             
               
-              <a class="source" href="users-rest-tests.html">
-                users-rest-tests.js
+              <a class="source" href="samples-rest-tests.html">
+                samples-rest-tests.js
               </a>
             
               
@@ -71,6 +81,16 @@
               
               <a class="source" href="admins-tests.html">
                 admins-tests.js
+              </a>
+            
+              
+              <a class="source" href="clients-tests.html">
+                clients-tests.js
+              </a>
+            
+              
+              <a class="source" href="providers-tests.html">
+                providers-tests.js
               </a>
             
               
@@ -139,10 +159,10 @@
     Schema = mongoose.Schema;
 
 <span class="hljs-keyword">var</span> sampleSchema = <span class="hljs-keyword">new</span> Schema({
-    name          : <span class="hljs-built_in">String</span>, 
-    template      : { type: <span class="hljs-built_in">String</span>, ngoform: { control: <span class="hljs-string">'Textarea'</span> } },
-    live          : { type: <span class="hljs-built_in">Boolean</span>, <span class="hljs-keyword">default</span>: <span class="hljs-literal">true</span>, ngoform: { control: <span class="hljs-string">'Toggle'</span> } },
-	created       : <span class="hljs-built_in">Date</span>         
+    <span class="hljs-attr">name</span>          : <span class="hljs-built_in">String</span>, 
+    <span class="hljs-attr">template</span>      : { <span class="hljs-attr">type</span>: <span class="hljs-built_in">String</span>, <span class="hljs-attr">ngoform</span>: { <span class="hljs-attr">control</span>: <span class="hljs-string">'Textarea'</span> } },
+    <span class="hljs-attr">live</span>          : { <span class="hljs-attr">type</span>: <span class="hljs-built_in">Boolean</span>, <span class="hljs-attr">default</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">ngoform</span>: { <span class="hljs-attr">control</span>: <span class="hljs-string">'Toggle'</span> } },
+	<span class="hljs-attr">created</span>       : <span class="hljs-built_in">Date</span>         
 });</pre></div></div>
             
         </li>
@@ -198,7 +218,7 @@
             
             <div class="content"><div class='highlight'><pre>sampleSchema.statics.customMethod = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">paramid, cb</span>) </span>{
   <span class="hljs-keyword">var</span> Sample = <span class="hljs-keyword">this</span>;
-  Sample.findOne({ _id: paramid}, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, sample</span>)</span>{
+  Sample.findOne({ <span class="hljs-attr">_id</span>: paramid}, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, sample</span>)</span>{
       cb(err, sample);
   });
 }</pre></div></div>

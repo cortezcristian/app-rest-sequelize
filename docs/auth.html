@@ -24,6 +24,16 @@
               </a>
             
               
+              <a class="source" href="clients.html">
+                clients.js
+              </a>
+            
+              
+              <a class="source" href="providers.html">
+                providers.js
+              </a>
+            
+              
               <a class="source" href="sample.html">
                 sample.js
               </a>
@@ -31,6 +41,11 @@
               
               <a class="source" href="user.html">
                 user.js
+              </a>
+            
+              
+              <a class="source" href="apis.html">
+                apis.js
               </a>
             
               
@@ -44,23 +59,18 @@
               </a>
             
               
-              <a class="source" href="samples-crud-tests.html">
-                samples-crud-tests.js
-              </a>
-            
-              
               <a class="source" href="server.html">
                 server.js
               </a>
             
               
-              <a class="source" href="samples-rest-tests.html">
-                samples-rest-tests.js
+              <a class="source" href="clients--rest-tests.html">
+                clients--rest-tests.js
               </a>
             
               
-              <a class="source" href="users-rest-tests.html">
-                users-rest-tests.js
+              <a class="source" href="samples-rest-tests.html">
+                samples-rest-tests.js
               </a>
             
               
@@ -71,6 +81,16 @@
               
               <a class="source" href="admins-tests.html">
                 admins-tests.js
+              </a>
+            
+              
+              <a class="source" href="clients-tests.html">
+                clients-tests.js
+              </a>
+            
+              
+              <a class="source" href="providers-tests.html">
+                providers-tests.js
               </a>
             
               
@@ -109,6 +129,7 @@
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> app = <span class="hljs-built_in">module</span>.parent.exports.app,
     passport = <span class="hljs-built_in">require</span>(<span class="hljs-string">'passport'</span>),
     User = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../models/user.js'</span>),
+    logger = exports.logger = <span class="hljs-built_in">module</span>.parent.exports.logger,
     config = exports.config = <span class="hljs-built_in">module</span>.parent.exports.config;</pre></div></div>
             
         </li>
@@ -151,22 +172,21 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <h2 id="local-strategy">Local Strategy</h2>
-<ul>
-<li><a href="https://github.com/jaredhanson/passport-local">Passport Local</a></li>
-</ul>
+              <p>Local Strategy
+<a href="https://github.com/jaredhanson/passport-local">Passport Local</a></p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>app.post(<span class="hljs-string">'/admin'</span>,
-  passport.authenticate(<span class="hljs-string">'administrators'</span>, { successRedirect: <span class="hljs-string">'/admin/panel'</span>,
-                                    failureRedirect: <span class="hljs-string">'/admin'</span>})
+  passport.authenticate(<span class="hljs-string">'administrators'</span>, { <span class="hljs-attr">successRedirect</span>: <span class="hljs-string">'/admin/panel'</span>,
+                                    <span class="hljs-attr">failureRedirect</span>: <span class="hljs-string">'/admin'</span>,
+                                    <span class="hljs-attr">failureFlash</span>: <span class="hljs-literal">true</span>})
 );
 
 app.post(<span class="hljs-string">'/user'</span>,
-  passport.authenticate(<span class="hljs-string">'usersLogin'</span>, { successRedirect: <span class="hljs-string">'/'</span>,
-                                    failureRedirect: <span class="hljs-string">'/login'</span>,
-                                    failureFlash: <span class="hljs-literal">true</span>})
+  passport.authenticate(<span class="hljs-string">'usersLogin'</span>, { <span class="hljs-attr">successRedirect</span>: <span class="hljs-string">'/'</span>,
+                                    <span class="hljs-attr">failureRedirect</span>: <span class="hljs-string">'/user'</span>,
+                                    <span class="hljs-attr">failureFlash</span>: <span class="hljs-literal">true</span>})
 );</pre></div></div>
             
         </li>
@@ -178,14 +198,12 @@ app.post(<span class="hljs-string">'/user'</span>,
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>If facebook enabled</p>
+              <p>Facebook Routes
+<a href="https://github.com/jaredhanson/passport-facebook">Passport Facebook</a></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">if</span>(config.auth.facebook.clientid.length) {
-app.get(<span class="hljs-string">'/auth/facebook'</span>, passport.authenticate(<span class="hljs-string">'facebook'</span>, { scope : <span class="hljs-string">'email'</span> }));
-
-app.get(<span class="hljs-string">'/unlink/facebook'</span>, userAuth.autorizer, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>) </span>{</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">if</span>(<span class="hljs-keyword">typeof</span> config.auth.facebook !== <span class="hljs-string">"undefined"</span></pre></div></div>
             
         </li>
         
@@ -196,25 +214,14 @@ app.get(<span class="hljs-string">'/unlink/facebook'</span>, userAuth.autorizer,
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>var user            = req.user;</p>
+              <p>&amp;&amp; config.auth.facebook.enabled</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        User.findOne({ _id : req.user._id }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, user</span>) </span>{
-            user.facebook.token = <span class="hljs-literal">undefined</span>;
-            user.save(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, user</span>) </span>{
-                res.redirect(<span class="hljs-string">'/profile/me'</span>);
-            });
-        });
-    });
+            <div class="content"><div class='highlight'><pre>    &amp;&amp; config.auth.facebook.clientid.length) {
+app.get(<span class="hljs-string">'/auth/facebook'</span>, passport.authenticate(<span class="hljs-string">'facebook'</span>, { <span class="hljs-attr">scope</span> : <span class="hljs-string">'email'</span> }));
 
-
-app.get(<span class="hljs-string">'/auth/facebook/callback'</span>,
-    passport.authenticate(<span class="hljs-string">'facebook'</span>, {
-        successRedirect : <span class="hljs-string">'/profile/me'</span>,
-        failureRedirect : <span class="hljs-string">'/'</span>
-    }));
-}</pre></div></div>
+app.get(<span class="hljs-string">'/unlink/facebook'</span>, userAuth.autorizer, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>) </span>{</pre></div></div>
             
         </li>
         
@@ -224,6 +231,35 @@ app.get(<span class="hljs-string">'/auth/facebook/callback'</span>,
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>var user            = req.user;</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        User.findOne({ <span class="hljs-attr">_id</span> : req.user._id }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, user</span>) </span>{
+            user.facebook.token = <span class="hljs-literal">undefined</span>;
+            user.save(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, user</span>) </span>{
+                res.redirect(<span class="hljs-string">'/user/profile'</span>);
+            });
+        });
+    });
+
+
+app.get(<span class="hljs-string">'/auth/facebook/callback'</span>,
+    passport.authenticate(<span class="hljs-string">'facebook'</span>, {
+        <span class="hljs-attr">successRedirect</span> : <span class="hljs-string">'/user/profile'</span>,
+        <span class="hljs-attr">failureRedirect</span> : <span class="hljs-string">'/user'</span>
+    }));
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <p>Logout</p>
 

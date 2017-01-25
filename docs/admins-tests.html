@@ -24,6 +24,16 @@
               </a>
             
               
+              <a class="source" href="clients.html">
+                clients.js
+              </a>
+            
+              
+              <a class="source" href="providers.html">
+                providers.js
+              </a>
+            
+              
               <a class="source" href="sample.html">
                 sample.js
               </a>
@@ -31,6 +41,11 @@
               
               <a class="source" href="user.html">
                 user.js
+              </a>
+            
+              
+              <a class="source" href="apis.html">
+                apis.js
               </a>
             
               
@@ -44,23 +59,18 @@
               </a>
             
               
-              <a class="source" href="samples-crud-tests.html">
-                samples-crud-tests.js
-              </a>
-            
-              
               <a class="source" href="server.html">
                 server.js
               </a>
             
               
-              <a class="source" href="samples-rest-tests.html">
-                samples-rest-tests.js
+              <a class="source" href="clients--rest-tests.html">
+                clients--rest-tests.js
               </a>
             
               
-              <a class="source" href="users-rest-tests.html">
-                users-rest-tests.js
+              <a class="source" href="samples-rest-tests.html">
+                samples-rest-tests.js
               </a>
             
               
@@ -71,6 +81,16 @@
               
               <a class="source" href="admins-tests.html">
                 admins-tests.js
+              </a>
+            
+              
+              <a class="source" href="clients-tests.html">
+                clients-tests.js
+              </a>
+            
+              
+              <a class="source" href="providers-tests.html">
+                providers-tests.js
               </a>
             
               
@@ -215,7 +235,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>        it(<span class="hljs-string">'add a admins'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>)</span>{
-            admins = <span class="hljs-keyword">new</span> Admins({ name: <span class="hljs-string">'admins'</span>+<span class="hljs-built_in">Math</span>.floor((<span class="hljs-built_in">Math</span>.random() * <span class="hljs-number">10</span>) + <span class="hljs-number">1</span>)});
+            admins = <span class="hljs-keyword">new</span> Admins({ <span class="hljs-attr">name</span>: <span class="hljs-string">'admins'</span>+<span class="hljs-built_in">Math</span>.floor((<span class="hljs-built_in">Math</span>.random() * <span class="hljs-number">10</span>) + <span class="hljs-number">1</span>)});
             admins.save(done);
         });
 
