@@ -15,7 +15,8 @@ var app = module.parent.exports.app,
   logger = module.parent.exports.logger;
 // ## Models
 var Client  = require('../models/clients.js'),
-  Provider  = require('../models/providers.js');
+  Provider  = require('../models/providers.js'),
+  ClientProviders  = require('../models/clients_providers.js');
 
 // Setup: Belongs-To-Many associations
 // http://docs.sequelizejs.com/en/latest/docs/associations/#belongs-to-many-associations
@@ -39,7 +40,7 @@ var clientResource = epilogue.resource({
 
 var providerResource = epilogue.resource({
   model: Provider,
-  endpoints: ['/api/v1/providers', '/api/v1/providers/:idProvider']
+  endpoints: ['/api/v1/providers', '/api/v1/providers/:id']
 });
 
 sequelize.sync({force:true});

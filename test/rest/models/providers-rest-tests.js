@@ -28,7 +28,7 @@ describe('REST API Provider '+d+"/api/v1/providers", function(){
         // It show create a new document in the database
         provider = Provider.build({ name: 'provider'+Math.floor((Math.random() * 10) + 1)});
         provider.save().then(function(record){
-            providerId = record.get('idProvider');
+            providerId = record.get('id');
             done()
         }).catch(function(error) {
             done(error);
