@@ -37,7 +37,7 @@ angular.module('anyandgoApp')
           enableFiltering: false,
           enableSorting: false,
           enableColumnMenu: false,
-          width: 34,
+          width: 120,
           enableCellEdit: false,
           enableHiding: false, cellTemplate:'../scripts/site/views/ui-grid-edit-btn.html' }
       ]
