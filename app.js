@@ -11,7 +11,6 @@ var bodyParser = require('body-parser');
 var stylus = require('stylus');
 var helmet = require('helmet');
 var csrf = require('csurf');
-var flash = require('connect-flash');
 var session = require('express-session');
 var methodOverride = require('method-override');
 var config = exports.config = require('./config');
@@ -34,13 +33,11 @@ process.on('uncaughtException', function(err) {
 var app = exports.app = express();
 
 app.set("envflag", config.envflag || process.env.NODE_ENV);
-app.set("autologin", config.autologin || {});
 
 // Setup vars
 app.use(function(req, res, next){
   res.locals.envflag = config.envflag || process.env.NODE_ENV;
   res.locals.path = req.path;
-  res.locals.autologin = config.autologin || {};
   next();
 });
 
@@ -172,7 +169,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Session
 app.use(session({ secret: 'secret', saveUninitialized: true, resave: true })); // session secret
-app.use(flash()); // use connect-flash for flash messages stored in session
 
 
 // Initialize epilogue
@@ -231,12 +227,6 @@ if (config.csrf && config.csrf === "enabled") {
       res.send('sorry your request was invalid');
     });
 }
-
-// Interceptors
-app.use(function(req, res, next) {
-    res.locals.flash = req.flash();
-    next();
-});
 
 // Routes
 require('./routes/apis');
