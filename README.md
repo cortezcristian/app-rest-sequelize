@@ -6,13 +6,10 @@ Sequelize Express Angular App [![Build Status](https://travis-ci.org/cortezcrist
 	- [Installation](#installation)
 	- [Development](#development)
 	- [Testing](#testing)
+	- [User Experience](#User Experience)
 - [Deliverables](#deliverables)
-	- Models:
-    - Client [models/clients.js](./models/clients.js)
-    - Client Unit Test [test/unit/models/providers-tests.js](./test/unit/models/providers-tests.js)
-    - Provider [models/providers.js](./models/providers.js)
-    - Provider Unit Test [test/unit/models/providers-tests.js](./test/unit/models/providers-tests.js)
-	- Rest:
+  - [Backend](#backend)
+  - [Frontend](#backend)
 - [Docs](#docs)
 	- [Demo](#demo)
 	- [Logs](#logs)
@@ -55,15 +52,29 @@ Running `grunt test` will run the unit tests with karma.
 $ grunt test --force
 ```
 
+## Deliverables
+
+### Backend
+
+- Models:
+  - Client [models/clients.js](./models/clients.js)
+  - Client Unit Test [test/unit/models/providers-tests.js](./test/unit/models/providers-tests.js)
+  - Provider [models/providers.js](./models/providers.js)
+  - Provider Unit Test [test/unit/models/providers-tests.js](./test/unit/models/providers-tests.js)
+- Rest:
+
+### Frontend
+
 ### Logs
 - Kickstart
 In order to gain velocity project was generated with [cortezcristian/anyandgo](http://anyandgo.io/)
-- [PR#1](https://github.com/AccelOne/angulartest/pull/://github.com/cortezcristian/app-rest-sequelize/pull/1)
+- [PR#1](https://github.com/cortezcristian/app-rest-sequelize/pull/1)
 Simplify structure and update dependencies, tweak test suite, integrate ci
+- [PR#2](https://github.com/cortezcristian/app-rest-sequelize/pull/2)
+Build APIs, create rest tests and make them fail initially, implement epilogue
 
 ## Express 4.x
 Facts about this implementation:
-- Started from basic generation
 - Jade template engine
 
 Modules added:
