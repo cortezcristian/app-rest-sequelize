@@ -12,7 +12,6 @@ var stylus = require('stylus');
 var i18n = require('i18n');
 var helmet = require('helmet');
 var csrf = require('csurf');
-var passport = require('passport');
 var flash = require('connect-flash');
 var session = require('express-session');
 var methodOverride = require('method-override');
@@ -20,7 +19,6 @@ var utils = require('./utils');
 var config = exports.config = require('./config');
 var anyandgo = exports.anyandgo = {};
 var epilogue = require('epilogue');
-var User = require('./models/user.js');
 
 // Anyandgo
 anyandgo.models = [];
@@ -53,13 +51,13 @@ app.use(function(req, res, next){
 });
 
 // Database Connection
-var dbConex = exports.dbConex = utils.dbConnection(config.db.domain,config.db.name,config.db.user,config.db.pass);
+//var dbConex = exports.dbConex = utils.dbConnection(config.db.domain,config.db.name,config.db.user,config.db.pass);
 var sequelize = exports.sequelize = require('./db/conn.js');
 
 // DB Fixtures
 if (config.fixtures && config.fixtures === "enabled") {
 // Load Fixtures
-require('./fixtures');
+//require('./fixtures');
 }
 
 // Security
@@ -177,8 +175,8 @@ if (typeof config.app.logs !== 'undefined' && config.app.logs.enabled) {
 }
 exports.logger = logger;
 // Log example
-logger.info("Starting anyandgo...");
-logger.info("For more information visit http://anyandgo.io/ ");
+logger.info("Starting Application...");
+logger.info("For more information visit https://github.com/cortezcristian/app-rest-sequelize/");
 
 app.use(bodyParser.json());
 app.use(expressValidator());
@@ -196,8 +194,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(i18n.init);
 // Passport
 app.use(session({ secret: 'secret', saveUninitialized: true, resave: true })); // session secret
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 
@@ -258,32 +254,13 @@ if (config.csrf && config.csrf === "enabled") {
     });
 }
 
-// used to serialize the user for the session
-passport.serializeUser(function(user, done) {
-    //console.log(user);
-    if(user.role === 'user') {
-        User.findOne({ _id : user._id }, function(err, usr){
-            done(err, usr);
-        });
-    } else {
-        done(null, user);
-    }
-});
-
-// used to deserialize the user
-passport.deserializeUser(function(user, done) {
-    done(null, user);
-});
-
 // Interceptors
 app.use(function(req, res, next) {
-    res.locals.user = req.user;
     res.locals.flash = req.flash();
     next();
 });
 
 // Routes
-require('./routes/auth');
 require('./routes/apis');
 
 /// catch 404 and forward to error handler
