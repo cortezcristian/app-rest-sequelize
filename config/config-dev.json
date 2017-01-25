@@ -9,6 +9,7 @@
          }
     },
     "db": {
+        "type" : "sqlite",
         "domain" : "localhost",
         "name" : "anyandgodb",
         "user" : "",
