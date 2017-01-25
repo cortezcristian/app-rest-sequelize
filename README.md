@@ -15,7 +15,7 @@ Sequelize Express Angular App [![Build Status](https://travis-ci.org/cortezcrist
   - [Docs](#docs)
   - [Logs](#logs)
   - [Notes](#notes)
-  - [Credits](#credits)
+- [Credits](#credits)
 
 ## Usage
 
@@ -121,5 +121,5 @@ Front end assets:
 + [UI Bootstrap](http://angular-ui.github.io/bootstrap/)
 
 
-### Credits
+## Credits
 [@cortezcristian](https://twitter.com/cortezcristian)
