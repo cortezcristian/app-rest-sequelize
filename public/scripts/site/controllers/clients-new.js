@@ -10,20 +10,25 @@
 angular.module('anyandgoApp')
   .controller('ClientsNewCtrl', function ($scope, $timeout, $location, Restangular, toastr) {
   $scope.operation = "Create";
+  $scope.isSaving = false;
 
   $scope.save = function(formData) {
-    var data = {};
-    angular.forEach(formData, function (value, key) {
-        if(typeof value === 'object' && value.hasOwnProperty('$modelValue')) {
-            data[key] = value.$modelValue;
-        }
-    });
+    if(!$scope.isSaving){
+      $scope.isSaving = true;
+      var data = {};
+      angular.forEach(formData, function (value, key) {
+          if(typeof value === 'object' && value.hasOwnProperty('$modelValue')) {
+              data[key] = value.$modelValue;
+          }
+      });
 
-    Restangular.all('clients').post(data).then(function(clients) {
-      toastr.info('New client was created', 'Operation Success');
-      $timeout(function(){
-         $location.path('/crud/clients');
-      }, 1000);
-    });
+      Restangular.all('clients').post(data).then(function(clients) {
+        toastr.info('New client was created', 'Operation Success');
+        $timeout(function(){
+           $scope.isSaving = false;
+           $location.path('/crud/clients');
+        }, 1000);
+      });
+    }
   }
 });

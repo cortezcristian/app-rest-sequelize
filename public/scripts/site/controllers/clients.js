@@ -158,7 +158,7 @@ angular.module('anyandgoApp')
    $scope.editRow = function (grid, row) {
         // Redirect to edit
         $timeout(function(){
-            $location.path('/crud/clientes-edit/'+row.entity._id);
+            $location.path('/crud/clients-edit/'+row.entity.id);
         }, 1000)
    };
 

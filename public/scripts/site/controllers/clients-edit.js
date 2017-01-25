@@ -2,42 +2,35 @@
 
 /**
  * @ngdoc function
- * @name anyandgoApp.controller:ClientesEditCtrl
+ * @name anyandgoApp.controller:ClientsEditCtrl
  * @description
- * # ClientesEditCtrl
+ * # ClientsEditCtrl
  * Controller of the anyandgoApp
  */
 angular.module('anyandgoApp')
-  .controller('ClientesEditCtrl', function ($scope, $location, $timeout, toastr, Restangular, clientes) {
-  $scope.operatoria = "Editar";
-  var original = clientes;
-  $scope.clientes = Restangular.copy(original);
-  
+  .controller('ClientsEditCtrl', function ($scope, $location, $timeout, toastr, Restangular, clients) {
+  $scope.operation = "Edit";
+
+  var original = clients;
+  $scope.clients = Restangular.copy(original);
+
 
   $scope.isClean = function() {
-    return angular.equals(original, $scope.clientes);
+    return angular.equals(original, $scope.clients);
   }
 
   $scope.destroy = function() {
     original.remove().then(function() {
-      if(navigator.userAgent.match(/Zombie/)) {
-          document.location.hash = "#/crud/clientes";
-      } else {
-        $location.path('/crud/clientes');
-      }
+      $location.path('/crud/clients');
     });
   };
 
   $scope.save = function() {
-    $scope.clientes.put().then(function() {
-      if(navigator.userAgent.match(/Zombie/)) {
-          document.location.hash = "#/crud/clientes";
-      } else {
-        toastr.info('Modificación de Clientes Satisfactoria', 'Operación Exitosa');
-        $timeout(function(){
-             $location.path('/crud/clientes');
-        }, 2000);
-      }
+    $scope.clients.put().then(function() {
+      toastr.info('Client info was edited', 'Operation Success');
+      $timeout(function(){
+        $location.path('/crud/clients');
+      }, 1000);
     });
   };
 });
