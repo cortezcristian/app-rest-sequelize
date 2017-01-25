@@ -47,6 +47,33 @@ angular
 
     // Setup Restangular
     RestangularProvider.setBaseUrl('/api/v1');
+    RestangularProvider.setRestangularFields({
+      id: 'id'
+    });
+
+    RestangularProvider.setRequestInterceptor(function(elem, operation, what) {
+
+      if (operation === 'put') {
+        elem._id = undefined;
+        return elem;
+      }
+      return elem;
+    });
+    debugger;
+
+    RestangularProvider.configuration.setIdToElem = function(elem) {
+			// if route is tenants ==> returns tenantID
+			//return elem[_.initial(elem.route).join('') + "ID"];
+			debugger;
+			return elem[elem.route.replace(/s$/,'') + "Id"];
+		}
+
+    RestangularProvider.configuration.getIdFromElem = function(elem) {
+			// if route is tenants ==> returns tenantID
+			//return elem[_.initial(elem.route).join('') + "ID"];
+			debugger;
+			return elem[elem.route.replace(/s$/,'') + "Id"];
+		}
 
     //$locationProvider.html5Mode(true).hashPrefix('!');
 

@@ -43,6 +43,7 @@ angular.module('anyandgoApp')
       ]
     };
 
+   // Query builders
    var param = { query : '' };
    var query = '{}';
    param.query = query;
@@ -51,6 +52,7 @@ angular.module('anyandgoApp')
    param.skip = 0;
    $scope.sortConfig = { name: 'name', sort: { direction: "asc" } };
 
+   // Main Data Fetch
    $scope.getPage = function(pageSize, newPage, sortOpts, filterOpts) {
      param.limit = pageSize;
      param.skip = (newPage-1)*param.limit;
@@ -104,8 +106,138 @@ angular.module('anyandgoApp')
      });
    };
 
+   // Fetch for the first time
    $scope.getPage(25,1, $scope.sortConfig);
    //$scope.clients = Restangular.all("clients").getList().$object;
+
+   // Remove functionality
+   $scope.confirmRemove = function (size) {
+
+    var modalInstance = $modal.open({
+      //animation: $scope.animationsEnabled,
+      templateUrl: '../scripts/site/views/modal-remove.html',
+      controller: 'ModalRemoveInstanceCtrl',
+      size: size,
+      resolve: {
+        valor: function(){ return 'nombre'; },
+        extra: function(){ return '';},
+        items: function () {
+          return $scope.gridApi.selection.getSelectedRows();
+        }
+      }
+    });
+
+    modalInstance.result.then(function (docs) {
+      var n = 0;
+      var prom = [];
+
+      angular.forEach(docs, function(doc){
+        prom.push(
+          doc.remove().then(function() {
+            var index = $scope.gridOptions.data.indexOf(doc);
+            $log.log("Removed", index);
+            if (index !== -1) {
+                $scope.gridOptions.data.splice(index, 1);
+                n++;
+            }
+          }));
+      });
+
+      $q.all(prom).then(function () {
+          $scope.multipleSelected -= n;
+          toastr.info(' '+n+' documentos borrados', 'Operación Exitosa');
+      });
+
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+   };
+
+
+   // Edit Trigger
+   $scope.editRow = function (grid, row) {
+        // Redirect to edit
+        $timeout(function(){
+            $location.path('/crud/clientes-edit/'+row.entity._id);
+        }, 1000)
+   };
+
+
+   // Registered grid apis
+
+   $scope.gridOptions.onRegisterApi = function(gridApi){
+      //set gridApi on scope
+      $scope.gridApi = gridApi;
+      gridApi.selection.on.rowSelectionChanged($scope,function(row){
+        var msg = 'row selected ' + row.isSelected;
+        $log.log(msg);
+        if(row.isSelected) {
+            $scope.multipleSelected++;
+        } else {
+            $scope.multipleSelected--;
+        }
+      });
+
+      gridApi.selection.on.rowSelectionChangedBatch($scope,function(rows){
+        var msg = 'rows changed ' + rows.length;
+        $log.log(msg);
+        if(rows[0].isSelected){
+            $scope.multipleSelected += rows.length;
+        } else {
+            $scope.multipleSelected -= rows.length;
+        }
+      });
+
+      // External Filtering
+      // http://ui-grid.info/docs/#/tutorial/308_external_filtering
+      $scope.gridApi.core.on.filterChanged( $scope, function() {
+        var grid = this.grid;
+
+        // Go to 1st page
+        grid.options.paginationCurrentPage = 1;
+        // Sort Global Config
+
+        $scope.getPage(
+            grid.options.paginationPageSize,
+            grid.options.paginationCurrentPage,
+            $scope.sortConfig,
+            grid.columns);
+      });
+
+      // External Sort
+      // http://ui-grid.info/docs/#/tutorial/307_external_sorting
+      $scope.gridApi.core.on.sortChanged($scope, function(grid, sortColumns) {
+        var grid = this.grid;
+        var sortOpts;
+        if (sortColumns && sortColumns.length > 0) {
+          sortOpts = sortColumns[0];
+        } else {
+          sortOpts = null;
+        }
+        // Go to 1st page
+        grid.options.paginationCurrentPage = 1;
+        // Sort Global Config
+        $scope.sortConfig = sortOpts;
+
+        $scope.getPage(
+            grid.options.paginationPageSize,
+            grid.options.paginationCurrentPage,
+            sortOpts,
+            grid.columns);
+      });
+
+      // External Pagination
+      // http://ui-grid.info/docs/#/tutorial/314_external_pagination
+      gridApi.pagination.on.paginationChanged($scope, function (newPage, pageSize) {
+        var grid = this.grid;
+        $scope.gridOptions.pageNumber = newPage;
+        $scope.gridOptions.pageSize = pageSize;
+
+        $scope.getPage(pageSize, newPage,
+            $scope.sortConfig, grid.columns);
+
+      });
+    };
 
 
   });

@@ -182,8 +182,10 @@ var Client = require('./models/clients.js');
 // Create REST resource
 var clientResource = epilogue.resource({
   model: Client,
-  endpoints: ['/api/v1/clients', '/api/v1/clients/:idClient']
+  endpoints: ['/api/v1/clients', '/api/v1/clients/:id']
 });
+
+sequelize.sync({force:true});
 
 /*
 app.get('/clients', function(req, res){

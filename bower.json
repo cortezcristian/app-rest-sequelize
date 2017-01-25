@@ -10,14 +10,14 @@
     "jquery": "~2.1.1",
     "angular-bootstrap": "~0.11.2",
     "bootstrap": "~3.3.0",
-    "restangular": "~1.4.0",
-    "angular": "~1.4.0",
-    "angular-resource": "~1.4.0",
-    "angular-cookies": "~1.4.0",
-    "angular-sanitize": "~1.4.0",
-    "angular-animate": "~1.4.0",
-    "angular-touch": "~1.4.0",
-    "angular-route": "~1.4.0",
+    "restangular": "~1.6.0",
+    "angular": "~1.5.0",
+    "angular-resource": "~1.5.0",
+    "angular-cookies": "~1.5.0",
+    "angular-sanitize": "~1.5.0",
+    "angular-animate": "~1.5.0",
+    "angular-touch": "~1.5.0",
+    "angular-route": "~1.5.0",
     "fontawesome": "~4.2.0",
     "perfect-scrollbar": "~0.6.5",
     "components-font-awesome": "~4.4.0",
@@ -25,5 +25,8 @@
     "angular-ui-grid": "~3.0.6",
     "angular-toastr": "~1.5.0",
     "angular-hotkeys": "chieffancypants/angular-hotkeys#~1.6.0"
+  },
+  "resolutions": {
+    "angular": "~1.5.0"
   }
 }
