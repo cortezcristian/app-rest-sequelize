@@ -43,10 +43,6 @@ app.use(function(req, res, next){
   res.locals.envflag = config.envflag || process.env.NODE_ENV;
   res.locals.path = req.path;
   res.locals.autologin = config.autologin || {};
-  // Analytics
-  if (config.analytics && config.analytics.enabled) {
-    res.locals.tracking = config.analytics.tracking;
-  }
   next();
 });
 
