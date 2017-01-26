@@ -113,7 +113,7 @@ Create SPA using AngularJS, added controllers, views, etc.
 - [PR#4](https://github.com/cortezcristian/app-rest-sequelize/pull/4)
 Refactoring, global configurations, user experience, added jasmine tests
 - [PR#5](https://github.com/cortezcristian/app-rest-sequelize/pull/5)
-Hook sync db and mysql configs
+Hook sync db and mysql configs, database setup instructions
 
 ### Notes
 
