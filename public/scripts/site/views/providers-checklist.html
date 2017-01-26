@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <div class="input-group">
         <input type="text" class="form-control" placeholder="Provider name..." ng-model="newprovider" aria-describedby="basic-addon2">
-        <span class="input-group-addon" id="basic-addon2">Add Provider</span>
+        <span class="input-group-addon" ng-click="createProvider()">Add Provider</span>
       </div>
     </div>
   </div>
@@ -12,14 +12,14 @@
       <div class="table-responsive">
         <table class="table table-sm table-hover">
           <tbody>
-             <tr class="category-row">
+             <tr class="category-row" ng-repeat="prov in list">
 
                 <td>
                   <div class="checkbox">
                     <label style="width:100%;">
                       <input type="checkbox" value="" checked>
                       <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                      Provider Name
+                      {{prov.name}}
                     </label>
                   </div>
                 </td>
