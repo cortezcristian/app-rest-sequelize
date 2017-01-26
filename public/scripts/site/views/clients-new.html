@@ -57,8 +57,9 @@
 
       <!-- field providers -->
       <div class="form-group">
+          <pre>{{ providers_list | json }}</pre>
           <label class="label-control">Providers:</label>
-        <div providers-checklist></div>
+        <div providers-checklist prov-list="providers_list"></div>
       </div>
       <!-- end field providers -->
 

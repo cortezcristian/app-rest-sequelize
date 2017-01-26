@@ -10,9 +10,12 @@ angular.module('anyandgoApp')
   .directive('providersChecklist', function () {
     return {
       restrict: 'AC',
+      transclude: true,
       templateUrl: '/scripts/site/views/providers-checklist.html',
+      bindToController: true,
+      scope: true,
       controller: function($scope, $log, $modal, Restangular, toastr, $q){
-        $log.log('Started!');
+        $log.log('Parent Scope List', $scope.providers_list);
         $scope.newprovider = "";
         $scope.list = [];
 
@@ -98,11 +101,45 @@ angular.module('anyandgoApp')
           $scope.list = Restangular.all("providers").getList().$object;
         }
 
+        // Watch Current List
+        $scope.$watch('list', function(){
+          $log.log("List changed: ", $scope.list);
+          $scope.updateCheckedItems();
+        });
+
+        // Scan and Check
+        $scope.updateCheckedItems = function(){
+          $scope.$parent.providers_list = $scope.list.filter(function(elem){
+            return elem.checked;
+          });
+          $log.log("Updated $parent.:", $scope.$parent.providers_list);
+        }
+
+        $scope.initializeCheckedItems = function(){
+          // Iterate parent list
+          angular.forEach($scope.$parent.providers_list, function(prov){
+            angular.forEach($scope.list, function(p, i){
+              if(p.id === prov.id){
+                $scope.list[i].checked = true;
+              }
+            });
+          });
+          $scope.itemInitialized = true;
+        };
+
+        $scope.itemInitialized = false;
+        // Watch Current List
+        $scope.$parent.$watch('providers_list', function(){
+          if(!$scope.itemInitialized){
+            $log.log("Initialize from parent:", $scope.$parent.providers_list);
+            $scope.initializeCheckedItems();
+          }
+        });
+
         // Fetch List
         $scope.refreshProvidersList();
       },
       link: function postLink(scope, element, attrs) {
-
       }
     };
   });

@@ -18,7 +18,7 @@
                 <td>
                   <div class="checkbox">
                     <label style="width:100%;" ng-show="!prov.editing">
-                      <input type="checkbox" value="" checked>
+                      <input type="checkbox" ng-change="updateCheckedItems()" ng-checked="prov.checked" ng-model="prov.checked">
                       <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
                       {{prov.name}}
                     </label>
