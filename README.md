@@ -47,7 +47,7 @@ Being on the main project folder run:
 ```
 $ git clone git@github.com:cortezcristian/app-rest-sequelize.git
 $ cd app-rest-sequelize
-$ npm i && bower i && grunt
+$ npm i && bower i && grunt --force
 ```
 
 ### Development

@@ -15,6 +15,7 @@ angular.module('anyandgoApp')
 
   // Providers list
   $scope.providers_list = [];
+  $scope.providers_relationships = [];
 
   $scope.save = function(formData) {
     if(!$scope.isSaving){

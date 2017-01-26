@@ -22,10 +22,12 @@ angular.module('anyandgoApp')
         // Create
         $scope.createProvider = function(){
           if($scope.newprovider !== ""){
-            Restangular.all('providers').post({name: $scope.newprovider}).then(function(providers) {
+            Restangular.all('providers').post({name: $scope.newprovider}).then(function(provider) {
               toastr.info('New provider was created', 'Operation Success');
               $scope.newprovider = "";
-              $scope.refreshProvidersList();
+              //$scope.refreshProvidersList();
+              // Push the new provider unchecked
+              $scope.list.push(provider);
             });
           }
         }
@@ -54,12 +56,18 @@ angular.module('anyandgoApp')
               prom.push(
                 doc.remove().then(function() {
                   $log.log("Removed", doc);
+                  $scope.list.forEach(function(d, i){
+                    if(d.id === doc.id){
+                      //delete $scope.list[i];
+                      $scope.list.splice(i, 1);
+                    }
+                  });
                 }));
             });
 
             $q.all(prom).then(function () {
               toastr.info('Provider was removed', 'Operation Success');
-              $scope.refreshProvidersList();
+              //$scope.refreshProvidersList();
             });
 
           }, function () {
@@ -80,7 +88,16 @@ angular.module('anyandgoApp')
           doc.put().then(function() {
             toastr.info('Client info was edited', 'Operation Success');
             doc.editing = false;
-            $scope.refreshProvidersList();
+            // resolve editing
+            //$scope.refreshProvidersList();
+            $scope.list.forEach(function(d, i){
+              if(d.id === doc.id){
+                // keep checked status
+                doc.checked = d.checked;
+                // swap them
+                $scope.list[i] = doc;
+              }
+            });
           });
         };
 
@@ -105,8 +122,8 @@ angular.module('anyandgoApp')
         $scope.$watchCollection('list', function(){
           $log.log("List changed: ", $scope.list);
           $scope.updateCheckedItems();
-          debugger;
-          if($scope.$parent.providers_relationships.length > 0
+          if($scope.$parent.providers_relationships
+            && $scope.$parent.providers_relationships.length > 0
             && $scope.list.length > 0
             && !$scope.itemInitialized){
             $scope.initializeCheckedItems();
