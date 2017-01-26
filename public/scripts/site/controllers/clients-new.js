@@ -31,7 +31,6 @@ angular.module('anyandgoApp')
         // Iterate and save relationships sending that to the new endpoint
         if(angular.isDefined(c.id) && $scope.providers_list.length > 0) {
           var list = $scope.providers_list.map(function(a){ return a.id;}).join(',');
-          debugger;
           $http.get($rootScope.config.app_api+'add-providers-to-clients/'+c.id+'/'+list)
             .then(function(response) {
               $log.log("Add providers to clients:", response);

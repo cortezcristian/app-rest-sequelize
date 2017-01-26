@@ -102,32 +102,46 @@ angular.module('anyandgoApp')
         }
 
         // Watch Current List
-        $scope.$watch('list', function(){
+        $scope.$watchCollection('list', function(){
           $log.log("List changed: ", $scope.list);
           $scope.updateCheckedItems();
+          debugger;
+          if($scope.$parent.providers_relationships.length > 0
+            && $scope.list.length > 0
+            && !$scope.itemInitialized){
+            $scope.initializeCheckedItems();
+          }
         });
+
+        // Fetch List
+        $scope.refreshProvidersList();
 
         // Scan and Check
         $scope.updateCheckedItems = function(){
+          // Propagate to parent
           $scope.$parent.providers_list = $scope.list.filter(function(elem){
             return elem.checked;
           });
           $log.log("Updated $parent.:", $scope.$parent.providers_list);
         }
 
+        $scope.itemInitialized = false;
         $scope.initializeCheckedItems = function(){
-          // Iterate parent list
-          angular.forEach($scope.$parent.providers_list, function(prov){
-            angular.forEach($scope.list, function(p, i){
-              if(p.id === prov.id){
-                $scope.list[i].checked = true;
-              }
+          // Child list shuold be ready
+          if($scope.list.length > 0){
+            // Iterate parent list
+            angular.forEach($scope.$parent.providers_relationships, function(prov){
+              angular.forEach($scope.list, function(p, i){
+                if(p.id === prov.ProviderId){
+                  $scope.list[i].checked = true;
+                }
+              });
             });
-          });
-          $scope.itemInitialized = true;
+            $scope.itemInitialized = true;
+          }
         };
 
-        $scope.itemInitialized = false;
+        /*
         // Watch Current List
         $scope.$parent.$watch('providers_list', function(){
           if(!$scope.itemInitialized){
@@ -135,9 +149,17 @@ angular.module('anyandgoApp')
             $scope.initializeCheckedItems();
           }
         });
+        */
+        // Watch Provider Relationships
+        $scope.$parent.$watchCollection('providers_relationships', function(){
+          $log.log("Client Grab provider relationships : ", $scope.providers_relationships);
+          if( $scope.providers_relationships.length > 0) {
+            $scope.initializeCheckedItems();
+          }
+        });
 
-        // Fetch List
-        $scope.refreshProvidersList();
+
+
       },
       link: function postLink(scope, element, attrs) {
       }
