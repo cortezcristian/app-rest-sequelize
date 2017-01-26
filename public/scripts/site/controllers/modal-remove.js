@@ -8,10 +8,8 @@
  * Controller of the anyandgoApp
  */
 angular.module('anyandgoApp')
-  .controller('ModalRemoveInstanceCtrl', function ($scope, $modalInstance, items, valor, extra, $filter) {
+  .controller('ModalRemoveInstanceCtrl', function ($scope, $modalInstance, items, $filter) {
       $scope.items = items;
-      $scope.valor = valor;
-      $scope.extra = extra;
 
       $scope.ok = function () {
         $modalInstance.close($scope.items);

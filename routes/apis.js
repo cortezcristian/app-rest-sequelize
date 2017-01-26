@@ -80,20 +80,42 @@ var clientproviderResource = epilogue.resource({
 });
 
 /**
- * @api {get} /add-providers-to-clients/:clienId/:csvList Save Client Providers Relationships
+ * @api {get} /add-providers-to-clients/:clientId/:csvList Save Client Providers Relationships
  * @apiName saveClientProvidersRelationships
  * @apiGroup RelationClientProviders
  *
  * @apiExample {curl} Example usage:
- *     curl -i http://localhost:3000/api/v1/add-providers-to-clients/c
+ *     curl -i http://localhost:3000/api/v1/add-providers-to-clients/1/1,2
  *
- * @apiSuccess {Array} List of relationships between client and providers
+ * @apiSuccess {Object} Returns the status of the operationD
  */
-app.get('/api/v1/add-providers-to-clients/:clienId/:csvList', function(req, res){
+app.get('/api/v1/add-providers-to-clients/:clientId/:csvList', function(req, res){
   // find the client by id
   // start finding the providers
   // create record in relationship table
-	res.json({});
+  // TODO: add posible errored statuses
+  var providersList = [];
+  providersList = req.params.csvList.split(',');
+  providersList.filter(function(item){
+    return !isNaN(parseFloat(item));
+  }).map(function(num){ return parseFloat(num); });
+  console.log(providersList);
+
+  // Search Providers
+  Provider.findAll({ where: { id: providersList } }).then(function(providers) {
+    // providers will be an array of Providers having the ids
+    console.log("Providers found:", providers.length);
+    // Get current client
+    Client.findOne({ where: { id: req.params.clientId } }).then(function(client){
+      console.log("Client found by id :", req.params.clientId, client);
+      // Update relationships
+      client.setProviders(providers).then(function(result){
+        console.log("Relationships udpated!");
+        res.json({ status: 'ok' });
+      });
+    })
+  });
+
 /*
   Client.findAll().then(function(result){
     res.json(result);
@@ -101,8 +123,9 @@ app.get('/api/v1/add-providers-to-clients/:clienId/:csvList', function(req, res)
 */
 });
 
-sequelize.sync({force:true});
-
+if (1 || config.db.sync && config.db.sync === "enabled") {
+  //sequelize.sync({force:true});
+}
 
 // CORS Interceptors
 if (config.cors && config.cors === "enabled") {

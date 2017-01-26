@@ -2,8 +2,9 @@
   <div class="row">
     <div class="col-md-12">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Provider name..." ng-model="newprovider" aria-describedby="basic-addon2">
-        <span class="input-group-addon" id="basic-addon2">Add Provider</span>
+        <input type="text" class="form-control" placeholder="Provider name..."
+          ng-keydown="keyPressProvider(newprovider, $event)" ng-model="newprovider">
+        <span class="input-group-addon" ng-click="createProvider()">Add Provider</span>
       </div>
     </div>
   </div>
@@ -12,26 +13,33 @@
       <div class="table-responsive">
         <table class="table table-sm table-hover">
           <tbody>
-             <tr class="category-row">
+             <tr class="category-row" ng-repeat="prov in list">
 
                 <td>
                   <div class="checkbox">
-                    <label style="width:100%;">
-                      <input type="checkbox" value="" checked>
+                    <label style="width:100%;" ng-show="!prov.editing">
+                      <input type="checkbox" ng-change="updateCheckedItems()" ng-checked="prov.checked" ng-model="prov.checked">
                       <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                      Provider Name
+                      {{prov.name}}
                     </label>
+                    <div class="input-group" ng-show="prov.editing">
+                      <input type="text" class="form-control prevent-it" ng-keydown="keyPressProvider(prov, $event)" ng-model="prov.name">
+                      <span class="input-group-addon" ng-click="changeProvider(prov, $event)">Save Provider</span>
+                    </div>
                   </div>
                 </td>
 
                 <td style="width: 30px;">
-                    <button class="btn-view-fund btn btn-default btn-xs  pull-left" type="button">
+                    <button class="btn-view-fund btn btn-default btn-xs  pull-left" ng-click="startEdition(prov)" type="button" ng-show="!prov.editing">
                       <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    </button>
+                    <button class="btn-view-fund btn btn-default btn-xs  pull-left" type="button" ng-click="cancelEdition(prov)" ng-show="prov.editing">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                     </button>
                 </td>
 
                 <td style="width: 30px;">
-                  <button class="btn-view-fund btn btn-default btn-xs  pull-left" type="button">
+                  <button class="btn-view-fund btn btn-default btn-xs  pull-left" type="button" ng-click="confirmRemove(prov)">
                       <span class="glyphicon glyphicon-trash " aria-hidden="true"></span>
                   </button>
                 </td>

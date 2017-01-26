@@ -3,11 +3,10 @@ Sequelize Express Angular App [![Build Status](https://travis-ci.org/cortezcrist
 
 
 - [Usage](#usage)
-  - [User Experience](#User Experience)
 - [Setup](#Setup)
-	- [Installation](#installation)
-	- [Development](#development)
-	- [Testing](#testing)
+  - [Installation](#installation)
+  - [Development](#development)
+  - [Testing](#testing)
 - [Deliverables](#deliverables)
   - [Backend](#backend)
   - [Frontend](#backend)
@@ -15,9 +14,23 @@ Sequelize Express Angular App [![Build Status](https://travis-ci.org/cortezcrist
   - [Docs](#docs)
   - [Logs](#logs)
   - [Notes](#notes)
-  - [Credits](#credits)
+- [Credits](#credits)
 
 ## Usage
+
+When application starts you will see the Clients list:
+
+<img src="https://www.dropbox.com/s/jfgqo33abzquoq8/Screenshot%202017-01-26%2009.56.35.png?dl=1" width="600" />
+
+It will allow you to create a new one, edit and batch remove by selecting and pressing the remove button on top.
+
+<img src="https://www.dropbox.com/s/8ytc3grr2dar5og/Screenshot%202017-01-26%2010.00.51.png?dl=1" width="600" />
+
+While editing or creating you can update Providers.
+
+<img src="https://www.dropbox.com/s/h7k2xvl0ytb39nu/Screenshot%202017-01-26%2010.03.38.png?dl=1" width="600" />
+
+Messages on the bottom right corner will keep you updated about the status of the operations
 
 ## Setup
 
@@ -60,11 +73,7 @@ $ npm start & # start the server first
 $ mocha test/rest
 ```
 
-Running `grunt test` will run the unit tests with karma.
-
-```
-$ grunt test --force
-```
+Note: Todo refactor angular, create service and add some karma/jasmine tests
 
 ## Deliverables
 
@@ -76,6 +85,7 @@ $ grunt test --force
   - Provider [models/providers.js](./models/providers.js)
   - Provider Unit Test [test/unit/models/providers-tests.js](./test/unit/models/providers-tests.js)
 - Rest:
+  - Api Rest [routes/apis.js](/routes/apis.js)
   - Client Rest Test [test/rest/models/clients-rest-tests.js](./test/rest/models/clients-rest-tests.js)
   - Provider Rest Test [test/rest/models/providers-rest-tests.js](./test/rest/models/providers-rest-tests.js)
 
@@ -99,7 +109,11 @@ Simplify structure and update dependencies, tweak test suite, integrate ci
 - [PR#2](https://github.com/cortezcristian/app-rest-sequelize/pull/2)
 Build APIs, create rest tests initially, implement epilogue and make them pass
 - [PR#3](https://github.com/cortezcristian/app-rest-sequelize/pull/3)
-Create SPA using AngularJS, add jasmine tests
+Create SPA using AngularJS, added controllers, views, etc.
+- [PR#4](https://github.com/cortezcristian/app-rest-sequelize/pull/4)
+Refactoring, global configurations, user experience, added jasmine tests
+- [PR#5](https://github.com/cortezcristian/app-rest-sequelize/pull/5)
+Hook sync db and mysql configs
 
 ### Notes
 
@@ -111,13 +125,6 @@ Facts about this implementation:
 - This app relies on Bootstrap and Stylus to manage the styles of the SPA.
 - Big part of the initial code was generated with a mean framework I have built [repo cortezcristian/anyandgo](https://github.com/cortezcristian/anyandgo), just stripped parts of it that were not needed and hacked it to work with relational databases.
 
-Modules added:
-+ [Stylus](http://learnboost.github.io/stylus/)
 
-Front end assets:
-+ [Bootstrap](http://angular-ui.github.io/bootstrap/)
-+ [UI Bootstrap](http://angular-ui.github.io/bootstrap/)
-
-
-### Credits
+## Credits
 [@cortezcristian](https://twitter.com/cortezcristian)

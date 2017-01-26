@@ -119,8 +119,6 @@ angular.module('anyandgoApp')
       controller: 'ModalRemoveInstanceCtrl',
       size: size,
       resolve: {
-        valor: function(){ return 'nombre'; },
-        extra: function(){ return '';},
         items: function () {
           return $scope.gridApi.selection.getSelectedRows();
         }
@@ -145,7 +143,7 @@ angular.module('anyandgoApp')
 
       $q.all(prom).then(function () {
           $scope.multipleSelected -= n;
-          toastr.info(' '+n+' documentos borrados', 'Operación Exitosa');
+          toastr.info(' '+n+' document(s) removed', 'Operation Success');
       });
 
     }, function () {

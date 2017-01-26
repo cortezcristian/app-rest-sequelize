@@ -57,8 +57,14 @@
 
       <!-- field providers -->
       <div class="form-group">
+          <div class="debugging hide">
+            Providers Relationships ->
+            <pre>{{ providers_relationships | json }}</pre>
+            Providers List <-
+            <pre>{{ providers_list | json }}</pre>
+          </div>
           <label class="label-control">Providers:</label>
-        <div providers-checklist></div>
+        <div providers-checklist prov-list="providers_list"></div>
       </div>
       <!-- end field providers -->
 
