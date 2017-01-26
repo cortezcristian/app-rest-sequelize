@@ -3,7 +3,6 @@ Sequelize Express Angular App [![Build Status](https://travis-ci.org/cortezcrist
 
 
 - [Usage](#usage)
-  - [User Experience](#User Experience)
 - [Setup](#Setup)
 	- [Installation](#installation)
 	- [Development](#development)
@@ -18,6 +17,20 @@ Sequelize Express Angular App [![Build Status](https://travis-ci.org/cortezcrist
 - [Credits](#credits)
 
 ## Usage
+
+When application starts you will see the Clients list:
+
+<img src="https://www.dropbox.com/s/jfgqo33abzquoq8/Screenshot%202017-01-26%2009.56.35.png?dl=1" width="600" />
+
+It will allow you to create a new one, edit and batch remove by selecting and pressing the remove button on top.
+
+<img src="https://www.dropbox.com/s/8ytc3grr2dar5og/Screenshot%202017-01-26%2010.00.51.png?dl=1" width="600" />
+
+While editing or creating you can update Providers.
+
+<img src="https://www.dropbox.com/s/h7k2xvl0ytb39nu/Screenshot%202017-01-26%2010.03.38.png?dl=1" width="600" />
+
+Messages on the bottom right corner will keep you updated about the status of the operations
 
 ## Setup
 
