@@ -124,7 +124,7 @@ app.get('/api/v1/add-providers-to-clients/:clientId/:csvList', function(req, res
 });
 
 if (1 || config.db.sync && config.db.sync === "enabled") {
-  //sequelize.sync({force:true});
+  sequelize.sync({force:true});
 }
 
 // CORS Interceptors
