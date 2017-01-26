@@ -8,9 +8,13 @@
  * Controller of the anyandgoApp
  */
 angular.module('anyandgoApp')
-  .controller('ClientsNewCtrl', function ($scope, $timeout, $location, Restangular, toastr) {
+  .controller('ClientsNewCtrl', function ($scope, $timeout, $location, Restangular, toastr,
+    $http, $rootScope, $log) {
   $scope.operation = "Create";
   $scope.isSaving = false;
+
+  // Providers list
+  $scope.providers_list = [];
 
   $scope.save = function(formData) {
     if(!$scope.isSaving){
@@ -22,12 +26,29 @@ angular.module('anyandgoApp')
           }
       });
 
-      Restangular.all('clients').post(data).then(function(clients) {
-        toastr.info('New client was created', 'Operation Success');
-        $timeout(function(){
-           $scope.isSaving = false;
-           $location.path('/crud/clients');
-        }, 1000);
+      Restangular.all('clients').post(data).then(function(c) {
+        $log.log(c, $scope.providers_list);
+        // Iterate and save relationships sending that to the new endpoint
+        if(angular.isDefined(c.id) && $scope.providers_list.length > 0) {
+          var list = $scope.providers_list.map(function(a){ return a.id;}).join(',');
+          debugger;
+          $http.get($rootScope.config.app_api+'add-providers-to-clients/'+c.id+'/'+list)
+            .then(function(response) {
+              $log.log("Add providers to clients:", response);
+              toastr.info('New client was created', 'Operation Success');
+              $timeout(function(){
+                 $scope.isSaving = false;
+                 $location.path('/crud/clients');
+              }, 1000);
+            });
+        } else {
+          // No relationships to save
+          toastr.info('New client was created', 'Operation Success');
+          $timeout(function(){
+             $scope.isSaving = false;
+             $location.path('/crud/clients');
+          }, 1000);
+        }
       });
     }
   }

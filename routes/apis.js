@@ -85,7 +85,7 @@ var clientproviderResource = epilogue.resource({
  * @apiGroup RelationClientProviders
  *
  * @apiExample {curl} Example usage:
- *     curl -i http://localhost:3000/api/v1/add-providers-to-clients/c
+ *     curl -i http://localhost:3000/api/v1/add-providers-to-clients/1/1,2
  *
  * @apiSuccess {Array} List of relationships between client and providers
  */
@@ -101,8 +101,9 @@ app.get('/api/v1/add-providers-to-clients/:clienId/:csvList', function(req, res)
 */
 });
 
-sequelize.sync({force:true});
-
+if (1 || config.db.sync && config.db.sync === "enabled") {
+  sequelize.sync({force:true});
+}
 
 // CORS Interceptors
 if (config.cors && config.cors === "enabled") {
