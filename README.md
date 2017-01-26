@@ -4,9 +4,9 @@ Sequelize Express Angular App [![Build Status](https://travis-ci.org/cortezcrist
 
 - [Usage](#usage)
 - [Setup](#Setup)
-	- [Installation](#installation)
-	- [Development](#development)
-	- [Testing](#testing)
+  - [Installation](#installation)
+  - [Development](#development)
+  - [Testing](#testing)
 - [Deliverables](#deliverables)
   - [Backend](#backend)
   - [Frontend](#backend)
@@ -73,11 +73,7 @@ $ npm start & # start the server first
 $ mocha test/rest
 ```
 
-Running `grunt test` will run the unit tests with karma.
-
-```
-$ grunt test --force
-```
+Note: Todo refactor angular, create service and add some karma/jasmine tests
 
 ## Deliverables
 
@@ -89,6 +85,7 @@ $ grunt test --force
   - Provider [models/providers.js](./models/providers.js)
   - Provider Unit Test [test/unit/models/providers-tests.js](./test/unit/models/providers-tests.js)
 - Rest:
+  - Api Rest [routes/apis.js](/routes/apis.js)
   - Client Rest Test [test/rest/models/clients-rest-tests.js](./test/rest/models/clients-rest-tests.js)
   - Provider Rest Test [test/rest/models/providers-rest-tests.js](./test/rest/models/providers-rest-tests.js)
 
