@@ -64,6 +64,35 @@ angular.module('anyandgoApp')
           });
         };
 
+        // Edit
+        $scope.startEdition = function(doc){
+          doc.editing = true;
+        }
+
+        $scope.cancelEdition = function(doc){
+          doc.editing = false;
+        }
+
+        $scope.changeProvider = function(doc, e) {
+          doc.put().then(function() {
+            toastr.info('Client info was edited', 'Operation Success');
+            doc.editing = false;
+            $scope.refreshProvidersList();
+          });
+        };
+
+        $scope.keyPressProvider = function(doc, e) {
+          if(e.keyCode == 13){
+            e.preventDefault();
+            e.stopPropagation();
+            if(angular.isDefined(doc.id)) {
+              $scope.changeProvider(doc, e);
+            } else {
+              $scope.createProvider();
+            }
+          }
+        };
+
         // Fetch
         $scope.refreshProvidersList = function() {
           $scope.list = Restangular.all("providers").getList().$object;
@@ -72,7 +101,8 @@ angular.module('anyandgoApp')
         // Fetch List
         $scope.refreshProvidersList();
       },
-      link: function postLink($scope, element, attrs) {
+      link: function postLink(scope, element, attrs) {
+
       }
     };
   });
