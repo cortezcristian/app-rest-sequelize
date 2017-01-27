@@ -53,7 +53,7 @@ angular.module('anyandgoApp')
    //var query = '{}';
    //param.query = query;
 
-   param.count = 5; // count
+   param.count = 25; // count
    param.offset = 0; // offset
    $scope.sortConfig = { name: 'name', sort: { direction: "asc" } };
 
