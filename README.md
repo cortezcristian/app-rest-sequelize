@@ -18,6 +18,8 @@ Sequelize Express Angular App [![Build Status](https://travis-ci.org/cortezcrist
 
 ## Usage
 
+See the [short demo video](https://youtu.be/btxVmpjj3Eg)
+
 When application starts you will see the Clients list:
 
 <img src="https://www.dropbox.com/s/jfgqo33abzquoq8/Screenshot%202017-01-26%2009.56.35.png?dl=1" width="600" />
