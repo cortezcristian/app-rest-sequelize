@@ -143,7 +143,7 @@ app.get('/api/v1/count/clients', function(req, res){
   });
 });
 
-if (1 || config.db.sync && config.db.sync === "enabled") {
+if (config.db.sync && config.db.sync === "enabled") {
   sequelize.sync({force:true});
 }
 

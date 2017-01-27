@@ -10,10 +10,13 @@
     },
     "db": {
         "type" : "mysql",
-        "domain" : "localhost",
-        "name" : "anyandgodb",
-        "user" : "",
-        "pass" : ""
+        "sync" : "enabled",
+        "domain" : "33.33.33.1",
+        "port" : "3306",
+        "name" : "sequelizedb",
+        "user" : "root",
+        "pass" : "root",
+        "file" : "database.sqlite"
     },
     "security": {
         "enabled" : true
