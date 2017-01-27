@@ -35,7 +35,8 @@ angular.module('anyandgoApp')
           enableFiltering: false,
           enableSorting: false,
           enableColumnMenu: false,
-          enableCellEdit: false
+          enableCellEdit: false,
+          cellTemplate:'../scripts/site/views/ui-grid-providers-cell.html'
          },
         /* fields end */
         { field: 'edit', name: '',

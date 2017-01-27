@@ -44,9 +44,11 @@ epilogue.initialize({
  *
  * @apiSuccess {Array} List of clients objects
  */
+// https://github.com/sequelize/sequelize/issues/1869
 var clientResource = epilogue.resource({
   model: Client,
   endpoints: ['/api/v1/clients', '/api/v1/clients/:id'],
+  associations: true,
   search: [
     {operator: '$like', param: 'sname', attributes: [ 'name' ]},
     {operator: '$like', param: 'sphone', attributes: [ 'phone' ]},
