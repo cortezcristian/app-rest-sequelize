@@ -78,7 +78,7 @@ $ mocha test/rest
 
 Note: Todo refactor angular, create service and add some karma/jasmine tests
 
-# MySQL
+### MySQL
 
 Setup MySQL: first create a database
 
