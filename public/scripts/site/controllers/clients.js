@@ -9,10 +9,19 @@
  */
 angular.module('anyandgoApp')
   .controller('ClientsCtrl', function ($scope, $timeout, $location,
-    $http, $rootScope, $q, $log, $modal, toastr, Restangular) {
+    $http, $rootScope, $q, $log, $modal, toastr, hotkeys, Restangular) {
 
     // Selection counter
     $scope.multipleSelected = 0;
+
+    // Hotkey to create new
+    hotkeys.add({
+      combo: 'n',
+      description: 'Create new client',
+      callback: function() {
+        $location.path('/crud/clients-new');
+      }
+    });
 
     // Grid Options
     $scope.gridOptions = {
