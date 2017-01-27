@@ -31,7 +31,12 @@ angular.module('anyandgoApp')
         { field: 'name' },
         { field: 'email' },
         { field: 'phone' },
-        { field: 'providers' },
+        { field: 'providers',
+          enableFiltering: false,
+          enableSorting: false,
+          enableColumnMenu: false,
+          enableCellEdit: false
+         },
         /* fields end */
         { field: 'edit', name: '',
           enableFiltering: false,
@@ -44,18 +49,18 @@ angular.module('anyandgoApp')
     };
 
    // Query builders
-   var param = { query : '' };
-   var query = '{}';
-   param.query = query;
+   var param = {};
+   //var query = '{}';
+   //param.query = query;
 
-   param.limit = 25;
-   param.skip = 0;
+   param.count = 5; // count
+   param.offset = 0; // offset
    $scope.sortConfig = { name: 'name', sort: { direction: "asc" } };
 
    // Main Data Fetch
    $scope.getPage = function(pageSize, newPage, sortOpts, filterOpts) {
-     param.limit = pageSize;
-     param.skip = (newPage-1)*param.limit;
+     param.count = pageSize;
+     param.offset = (newPage-1)*param.count;
      var param_count = {};
      // unselect checked
      $scope.multipleSelected=0;
@@ -74,23 +79,23 @@ angular.module('anyandgoApp')
 
      if(filterOpts && filterOpts != null) {
        angular.forEach(filterOpts, function(col){
-         //console.log(col.field, col.filters[0].term)
+         console.log(col.field, col.filters[0].term)
          if(col.filters[0].term){
-           param[col.field] = '~'+col.filters[0].term;
-           param_count[col.field] = '~'+col.filters[0].term;
+           param["s"+col.field] = col.filters[0].term;
+           param_count[col.field] = col.filters[0].term;
          }
-         if((typeof col.filters[0].term !== "string"
+         if((typeof col.filters[0].term === "string"
              && col.filters[0].term === "")
              || col.filters[0].term == null){
              // Clear all parameters with empty string
-             delete param[col.field];
+             delete param["s"+col.field];
              delete param_count[col.field];
          }
        });
      } else if($scope.gridOptions && $scope.gridOptions.columnDefs ) {
        angular.forEach($scope.gridOptions.columnDefs, function(col){
          // Clear all parameters just in case
-         delete param[col.field];
+         delete param["s"+col.field];
          delete param_count[col.field];
        });
 
@@ -99,15 +104,15 @@ angular.module('anyandgoApp')
      param_count.q = "100";
      //param_count.query = query;
      // Count Total
-     $http.get($rootScope.config.app_api+'clients?count=100')//, {params: param_count})
+     $http.get($rootScope.config.app_api+'count/clients')//, {params: param_count})
       .then(function(response) {
-       $scope.gridOptions.totalItems = response.data.count;
+       $scope.gridOptions.totalItems = response.data.total;
        $scope.gridOptions.data = Restangular.all("clients").getList(param).$object;
      });
    };
 
    // Fetch for the first time
-   $scope.getPage(25,1, $scope.sortConfig);
+   $scope.getPage(param.count, 1, $scope.sortConfig);
    //$scope.clients = Restangular.all("clients").getList().$object;
 
    // Remove functionality

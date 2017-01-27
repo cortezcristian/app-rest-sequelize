@@ -46,7 +46,12 @@ epilogue.initialize({
  */
 var clientResource = epilogue.resource({
   model: Client,
-  endpoints: ['/api/v1/clients', '/api/v1/clients/:id']
+  endpoints: ['/api/v1/clients', '/api/v1/clients/:id'],
+  search: [
+    {operator: '$like', param: 'sname', attributes: [ 'name' ]},
+    {operator: '$like', param: 'sphone', attributes: [ 'phone' ]},
+    {operator: '$like', param: 'semail', attributes: [ 'email' ]}
+  ]
 });
 
 /**
@@ -116,11 +121,24 @@ app.get('/api/v1/add-providers-to-clients/:clientId/:csvList', function(req, res
     })
   });
 
-/*
-  Client.findAll().then(function(result){
-    res.json(result);
+});
+
+
+
+/**
+ * @api {get} /add-providers-to-clients/:clientId/:csvList Save Client Providers Relationships
+ * @apiName saveClientProvidersRelationships
+ * @apiGroup RelationClientProviders
+ *
+ * @apiExample {curl} Example usage:
+ *     curl -i http://localhost:3000/api/v1/count/clients
+ *
+ * @apiSuccess {Object} Returns the status of the operationD
+ */
+app.get('/api/v1/count/clients', function(req, res){
+  Client.count().then(function(result){
+    res.json({ "total": result });
   });
-*/
 });
 
 if (1 || config.db.sync && config.db.sync === "enabled") {
@@ -148,4 +166,3 @@ if (config.cors && config.cors === "enabled") {
 app.get('/', function (req, res) {
     res.render('index', { title: 'Sequelize Express Angular App', section: 'Home' });
 });
-
