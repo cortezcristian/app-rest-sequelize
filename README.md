@@ -7,6 +7,7 @@ Sequelize Express Angular App [![Build Status](https://travis-ci.org/cortezcrist
   - [Installation](#installation)
   - [Development](#development)
   - [Testing](#testing)
+  - [MySQL](#mysql)
 - [Deliverables](#deliverables)
   - [Backend](#backend)
   - [Frontend](#backend)
@@ -76,6 +77,52 @@ $ mocha test/rest
 ```
 
 Note: Todo refactor angular, create service and add some karma/jasmine tests
+
+# MySQL
+
+Setup MySQL: first create a database
+
+```
+$ mysql -h localhost -u root -p
+> mysql> create database sequelizedb;
+Query OK, 1 row affected (0.00 sec)
+```
+
+After that alter the configuration file [config/config-local.json](config/config-local.json), and change database type and credentials:
+
+```
+"db": {
+    "type" : "mysql",
+    "sync" : "enabled",
+    "domain" : "33.33.33.1",
+    "port" : "3306",
+    "name" : "sequelizedb",
+    "user" : "root",
+    "pass" : "root",
+    "file" : "database.sqlite"
+},
+```
+
+Restart the server, and start using the application. If everything goes ok, you'll be able to see this tables:
+
+```
+mysql> use sequelizedb
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++-----------------------+
+| Tables_in_sequelizedb |
++-----------------------+
+| ClientProviders       |
+| Clients               |
+| Providers             |
++-----------------------+
+3 rows in set (0.00 sec)
+```
+
+
 
 ## Deliverables
 
